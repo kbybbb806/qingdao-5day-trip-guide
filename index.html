@@ -2,8 +2,946 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="refresh" content="0; url=/qingdao-5day-trip-guide/qingdao-guide.html">
-<title>青岛5日游攻略</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>青岛5日·黄岛金沙滩+老城区舒适休闲游</title>
+<style>
+:root {
+  --ink: #1a1f36; --paper: #fafbfc; --cream: #f5f3f0;
+  --accent: #c0392b; --accent2: #635bff;
+  --gold: #b8860b; --muted: #697386; --border: #e3e8ee;
+  --green: #2e7d32; --blue: #1565c0; --card-bg: #ffffff;
+  --shadow: 0 2px 12px rgba(0,0,0,.06);
+  --cat-sight: #6366f1; --cat-food: #f59e0b; --cat-culture: #10b981;
+  --cat-shop: #ec4899; --cat-night: #8b5cf6;
+  --cat-transport: #475569; --cat-hotel: #0f766e;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif; background:var(--paper); color:var(--ink); line-height:1.65; }
+.hero { background:linear-gradient(160deg,#7e1214 0%,#b52830 40%,#d4483a 100%); color:#fff; padding:52px 20px 44px; text-align:center; position:relative; overflow:hidden; }
+.hero::after { content:""; position:absolute; inset:0; background:radial-gradient(circle at 80% 20%, rgba(255,255,255,.08) 0%, transparent 40%), radial-gradient(circle at 20% 80%, rgba(0,0,0,.15) 0%, transparent 45%); pointer-events:none; }
+.hero-tag { display:inline-block; font-size:12px; letter-spacing:3px; border:1px solid rgba(255,255,255,.5); border-radius:20px; padding:4px 14px; margin-bottom:14px; }
+.hero h1 { font-size:clamp(22px,4.2vw,38px); font-weight:800; margin-bottom:10px; letter-spacing:1px; }
+.hero-sub { font-size:14px; opacity:.92; max-width:680px; margin:0 auto 18px; }
+.hero-meta { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; }
+.hero-meta span { background:rgba(255,255,255,.16); border:1px solid rgba(255,255,255,.3); padding:5px 14px; border-radius:20px; font-size:13px; }
+.section { max-width:1080px; margin:0 auto; padding:34px 18px 8px; }
+.section-title { font-size:20px; font-weight:800; margin-bottom:16px; display:flex; align-items:center; gap:8px; }
+.section-title::before { content:""; width:5px; height:22px; background:var(--accent); border-radius:3px; }
+.ov-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px; margin-bottom:18px; }
+.ov-card { background:var(--card-bg); border:1px solid var(--border); border-radius:14px; padding:16px; text-align:center; box-shadow:var(--shadow); }
+.ov-card .num { font-size:24px; font-weight:800; color:var(--accent); }
+.ov-card .lbl { font-size:12px; color:var(--muted); margin-top:4px; }
+.route-flow { background:var(--card-bg); border:1px solid var(--border); border-radius:14px; padding:20px; box-shadow:var(--shadow); font-size:14px; }
+.route-flow .rf-item { display:flex; align-items:center; gap:10px; padding:6px 0; border-bottom:1px dashed var(--border); flex-wrap:wrap; }
+.route-flow .rf-item:last-child { border-bottom:none; }
+.rf-icon { width:26px; height:26px; border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:12px; color:#fff; }
+.rf-1 { background:var(--cat-sight); } .rf-2 { background:var(--cat-culture); } .rf-3 { background:var(--cat-food); }
+.rf-way { color:var(--muted); font-size:12px; white-space:nowrap; }
+.wx-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr)); gap:12px; }
+.wx-card { background:var(--card-bg); border:1px solid var(--border); border-radius:14px; padding:16px; box-shadow:var(--shadow); }
+.wx-card .place { font-weight:700; margin-bottom:6px; }
+.wx-card .temp { font-size:20px; font-weight:800; color:var(--blue); }
+.wx-card .desc { font-size:12px; color:var(--muted); margin-top:4px; }
+.map-section { max-width:1080px; margin:0 auto; padding:34px 18px 8px; }
+.map-card { background:var(--card-bg); border:1px solid var(--border); border-radius:16px; overflow:hidden; box-shadow:var(--shadow); }
+.map-tabs { display:flex; overflow-x:auto; background:#f8f6f4; border-bottom:1px solid var(--border); }
+.map-tab { flex:1; min-width:96px; padding:12px 6px; border:none; background:transparent; font-size:13px; font-weight:600; color:var(--muted); cursor:pointer; border-bottom:3px solid transparent; white-space:nowrap; }
+.map-tab.active { color:var(--accent); border-bottom-color:var(--accent); background:#fff; }
+.map-body { position:relative; }
+.map-container { width:100%; height:440px; background:#e8ecef; }
+.map-legend { position:absolute; top:10px; right:10px; z-index:2; background:rgba(255,255,255,.92); border-radius:10px; padding:8px 10px; font-size:11px; box-shadow:0 2px 8px rgba(0,0,0,.12); display:flex; flex-direction:column; gap:4px; }
+.map-legend .lg-item { display:flex; align-items:center; gap:6px; }
+.lg-dot { width:10px; height:10px; border-radius:50%; }
+.lg-sight{background:var(--cat-sight);} .lg-food{background:var(--cat-food);} .lg-culture{background:var(--cat-culture);} .lg-shop{background:var(--cat-shop);} .lg-night{background:var(--cat-night);} .lg-transport{background:var(--cat-transport);} .lg-hotel{background:var(--cat-hotel);}
+.map-note { padding:8px 14px; font-size:12px; color:var(--muted); background:#faf8f6; border-top:1px solid var(--border); }
+.day-block { background:var(--card-bg); border:1px solid var(--border); border-radius:16px; padding:22px 18px; margin-bottom:18px; box-shadow:var(--shadow); }
+.day-head { display:flex; align-items:baseline; gap:10px; margin-bottom:16px; flex-wrap:wrap; }
+.day-badge { background:var(--accent); color:#fff; font-size:12px; font-weight:700; padding:3px 10px; border-radius:12px; }
+.day-title { font-size:18px; font-weight:800; }
+.day-sub { font-size:12px; color:var(--muted); }
+.tl-item { display:flex; gap:12px; padding:10px 0; }
+.tl-dot { width:12px; height:12px; border-radius:50%; background:var(--accent); box-shadow:0 0 0 4px rgba(192,57,43,.15); margin-top:6px; flex-shrink:0; }
+.tl-time { width:58px; flex-shrink:0; font-size:13px; font-weight:700; color:var(--blue); padding-top:2px; }
+.tl-content { flex:1; background:var(--paper); border:1px solid var(--border); border-radius:12px; padding:12px 14px; cursor:pointer; transition:all .2s; position:relative; }
+.tl-content:hover { transform:translateX(3px); box-shadow:var(--shadow); }
+.tl-content.hl { border-color:var(--accent2); box-shadow:0 0 0 2px rgba(99,91,255,.25); }
+.tl-place { font-weight:700; font-size:15px; display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+.tl-seq { width:20px; height:20px; border-radius:50%; color:#fff; font-size:11px; display:inline-flex; align-items:center; justify-content:center; font-weight:700; flex-shrink:0; }
+.seq-sight{background:var(--cat-sight);} .seq-food{background:var(--cat-food);} .seq-culture{background:var(--cat-culture);} .seq-shop{background:var(--cat-shop);} .seq-night{background:var(--cat-night);} .seq-transport{background:var(--cat-transport);} .seq-hotel{background:var(--cat-hotel);}
+.tl-desc { font-size:13px; color:#3d4557; margin-top:5px; }
+.tl-tags { display:flex; flex-wrap:wrap; gap:6px; margin-top:8px; }
+.tag { font-size:11px; padding:2px 9px; border-radius:10px; font-weight:600; }
+.tag-sight{background:#eef2ff;color:#4338ca;} .tag-food{background:#fffbeb;color:#b45309;} .tag-culture{background:#ecfdf5;color:#047857;} .tag-shop{background:#fdf2f8;color:#be185d;} .tag-night{background:#f5f3ff;color:#6d28d9;} .tag-transport{background:#f1f5f9;color:#334155;} .tag-hotel{background:#f0fdfa;color:#0f766e;}
+.tag-tip{background:#fff7ed;color:#c2410c;} .tag-cost{background:#eff6ff;color:#1d4ed8;}
+.transport-card { cursor:pointer; }
+.transport-line { display:flex; align-items:center; gap:8px; font-size:13px; margin-top:6px; color:#1e3a8a; font-weight:600; flex-wrap:wrap; }
+.transport-line .tno { background:#1e3a8a; color:#fff; border-radius:6px; padding:1px 8px; font-size:12px; }
+/* 酒店卡：搜索选择器 */
+.hotel-card { border-left:4px solid var(--cat-hotel); }
+.hotel-input { border:1px dashed #94a3b8; border-radius:8px; padding:6px 10px; font-size:14px; font-weight:700; width:100%; max-width:320px; background:#fff; color:var(--ink); cursor:pointer; }
+.hotel-input:focus { outline:2px solid var(--cat-hotel); border-color:var(--cat-hotel); }
+.hotel-input:hover { border-color:var(--cat-hotel); }
+.hotel-meta { font-size:12px; color:var(--muted); margin-top:6px; display:flex; align-items:center; gap:6px; flex-wrap:wrap; }
+.hotel-meta .pin-icon { color:var(--cat-hotel); }
+.hotel-meta .coord { font-family:ui-monospace,monospace; font-size:11px; color:#475569; }
+.hotel-meta .edit-link { color:var(--accent2); cursor:pointer; font-size:12px; text-decoration:underline; }
+.hotel-dropdown { margin-top:10px; background:#fff; border:1px solid var(--border); border-radius:10px; box-shadow:0 4px 16px rgba(0,0,0,.1); max-height:380px; overflow-y:auto; }
+.hotel-dropdown .hd-search { padding:10px; border-bottom:1px solid var(--border); position:sticky; top:0; background:#fff; }
+.hotel-dropdown .hd-search input { width:100%; padding:8px 12px; border:1px solid #cbd5e1; border-radius:8px; font-size:13px; }
+.hotel-dropdown .hd-search input:focus { outline:2px solid var(--cat-hotel); border-color:var(--cat-hotel); }
+.hotel-dropdown .hd-label { padding:8px 12px 4px; font-size:11px; color:var(--muted); font-weight:700; background:#f8fafc; }
+.hotel-dropdown .hd-opt { padding:10px 12px; border-bottom:1px solid #f1f5f9; cursor:pointer; }
+.hotel-dropdown .hd-opt:hover { background:#f0fdfa; }
+.hotel-dropdown .hd-opt:last-child { border-bottom:none; }
+.hotel-dropdown .hd-opt .opt-name { font-weight:700; font-size:14px; color:#1a1f36; }
+.hotel-dropdown .hd-opt .opt-addr { font-size:12px; color:var(--muted); margin-top:2px; }
+.hotel-dropdown .hd-opt .opt-coord { font-size:11px; color:#475569; font-family:ui-monospace,monospace; margin-top:2px; }
+.hotel-dropdown .hd-empty { padding:20px; text-align:center; color:var(--muted); font-size:13px; }
+.day-tips { margin-top:14px; background:#f8fafc; border:1px solid #e2e8f0; border-radius:12px; padding:14px 16px; }
+.day-tips .dt-title { font-size:14px; font-weight:800; color:#0f172a; margin-bottom:8px; display:flex; align-items:center; gap:6px; }
+.day-tips ul { list-style:none; }
+.day-tips li { font-size:13px; color:#334155; padding:4px 0 4px 18px; position:relative; }
+.day-tips li::before { content:"▸"; position:absolute; left:2px; color:var(--accent); }
+.day-tips li b { color:#0f172a; }
+/* 住宿区 */
+.pax-toggle { display:flex; gap:6px; margin-bottom:14px; align-items:center; flex-wrap:wrap; }
+.pax-toggle .pax-label { font-size:13px; color:var(--muted); margin-right:4px; }
+.pax-btn { padding:6px 14px; border:1px solid var(--border); border-radius:20px; background:#fff; cursor:pointer; font-size:13px; font-weight:600; color:var(--muted); }
+.pax-btn.active { background:var(--accent); color:#fff; border-color:var(--accent); }
+.hotel-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:12px; }
+.hotel-card2 { background:var(--card-bg); border:1px solid var(--border); border-radius:14px; padding:16px; box-shadow:var(--shadow); }
+.hotel-card2 .h-name { font-weight:700; font-size:15px; }
+.hotel-card2 .h-tag { display:inline-block; font-size:11px; background:#fff1f2; color:#be123c; padding:2px 8px; border-radius:8px; margin:6px 0; }
+.hotel-card2 .h-price { font-size:15px; font-weight:700; color:var(--green); margin:4px 0; }
+.hotel-card2 .h-price .room-type { font-size:12px; color:var(--muted); font-weight:500; margin-right:4px; }
+.hotel-card2 .h-desc { font-size:12px; color:var(--muted); margin-top:6px; }
+.budget-table { width:100%; border-collapse:collapse; background:var(--card-bg); border:1px solid var(--border); border-radius:12px; overflow:hidden; box-shadow:var(--shadow); font-size:14px; }
+.budget-table th { background:#f8f6f4; padding:10px 12px; text-align:left; font-size:13px; }
+.budget-table td { padding:10px 12px; border-top:1px solid var(--border); }
+.budget-table tr.total td { background:#fff7ed; font-weight:800; font-size:15px; }
+.budget-table .amt { text-align:right; font-weight:700; color:var(--accent); white-space:nowrap; }
+.tips-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:12px; }
+.tip-card { background:var(--card-bg); border:1px solid var(--border); border-radius:14px; padding:16px; box-shadow:var(--shadow); }
+.tip-card .t-title { font-weight:700; margin-bottom:6px; display:flex; align-items:center; gap:6px; }
+.tip-card ul { list-style:none; }
+.tip-card li { font-size:13px; color:#3d4557; padding:3px 0 3px 16px; position:relative; }
+.tip-card li::before { content:"▸"; position:absolute; left:2px; color:var(--accent); }
+.footer { text-align:center; padding:28px 16px 40px; color:var(--muted); font-size:12px; }
+@media (max-width:768px) {
+  .map-container { height:300px; }
+  .tl-time { width:52px; }
+  .map-legend { font-size:10px; padding:6px 8px; }
+  .tips-grid, .hotel-grid, .wx-grid { grid-template-columns:1fr; }
+  .hotel-input { max-width:100%; }
+  .pax-toggle .pax-btn { padding:5px 10px; font-size:12px; }
+}
+</style>
 </head>
-<body><p>正在跳转… <a href="/qingdao-5day-trip-guide/qingdao-guide.html">点击直达</a></p></body>
+<body>
+
+<div class="hero">
+  <div class="hero-tag">NATURE · TREK · PHOTO · CULTURE</div>
+  <h1>青岛 · 黄岛金沙滩 · 老城区<br>5日舒适休闲之旅</h1>
+  <div class="hero-sub">夫妻2人 · 长沙出发 · 8.28(周五)晚飞青岛 → 9.2(周三)晚返长沙 · 黄岛金沙滩3天慢生活 + 老城区2天Citywalk，美食海鲜为主，舒适轻松</div>
+  <div class="hero-meta">
+    <span>5天6晚 · 双人度假</span>
+    <span>预算约 ¥5,200 + 往返机票（2人）</span>
+    <span>长沙出发</span>
+    <span>飞机×2程 + 地铁/大巴</span>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">行程概览</div>
+  <div class="ov-grid">
+    <div class="ov-card"><div class="num">2</div><div class="lbl">区域：黄岛+老城</div></div>
+    <div class="ov-card"><div class="num">3晚+2晚</div><div class="lbl">黄岛+老城住宿</div></div>
+    <div class="ov-card"><div class="num">¥5,200+</div><div class="lbl">2人预算（机票另计）</div></div>
+    <div class="ov-card"><div class="num">18-29℃</div><div class="lbl">当前预报区间</div></div>
+    <div class="ov-card"><div class="num">09:00</div><div class="lbl">每天自然醒</div></div>
+  </div>
+  <div class="route-flow">
+    <div class="rf-item"><span class="rf-icon rf-1">✈</span><b>D0 8/28 周五晚</b><span>长沙黄花 → 青岛胶东 → 宿青岛金沙滩希尔顿酒店</span><span class="rf-way">航班与票价以实际出票为准</span></div>
+    <div class="rf-item"><span class="rf-icon rf-1">🏖</span><b>D1 8/29 周六</b><span>金沙滩景区 → 青岛西海岸金沙滩啤酒城 → 琴岛之星摩天轮 → 青岛唐岛湾国家湿地公园</span><span class="rf-way">逐段腾讯路线</span></div>
+    <div class="rf-item"><span class="rf-icon rf-3">🌊</span><b>D2 8/30 周日</b><span>珠山游客中心 → 青岛红树林度假世界 → 鱼鸣嘴村 → 唐岛湾南岸工会驿站</span><span class="rf-way">西海岸打车环线</span></div>
+    <div class="rf-item"><span class="rf-icon rf-2">🚇</span><b>D3 8/31 周一</b><span>天目山路地铁站 → 青岛站地铁站 → 团岛农贸市场 → 回澜阁 → 圣弥厄尔大教堂 → 劈柴院 → 大学路与鱼山路交叉口</span><span class="rf-way">地铁过海+老城步行</span></div>
+    <div class="rf-item"><span class="rf-icon rf-2">🌳</span><b>D4 9/1 周二</b><span>八大关景区 → 公主楼 → 花石楼 → 第二海水浴场 → 青岛信号山公园 → 青岛啤酒博物馆 → 威海路步行街</span><span class="rf-way">公交+步行</span></div>
+    <div class="rf-item"><span class="rf-icon rf-1">🌅</span><b>D5 9/2 周三</b><span>小青岛公园 → 鲁迅公园 → 小鱼山公园 → 酒店取行李 → 青岛胶东国际机场</span><span class="rf-way">返程航班以出票为准</span></div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">天气参考（8月下旬）</div>
+  <div class="wx-grid">
+    <div class="wx-card"><div class="place">青岛 8/28-29</div><div class="temp">20~29℃</div><div class="desc">有阵雨 · 湿度较高 · 随身带伞</div></div>
+    <div class="wx-card"><div class="place">青岛 8/30-31</div><div class="temp">18~29℃</div><div class="desc">以晴为主 · 早晚偏凉 · 注意防晒</div></div>
+    <div class="wx-card"><div class="place">青岛 9/1</div><div class="temp">22~28℃</div><div class="desc">晴到多云 · 湿度较高 · 户外补水</div></div>
+    <div class="wx-card"><div class="place">青岛 9/2</div><div class="temp">23~28℃</div><div class="desc">大部晴朗 · 体感闷热 · 上午游玩</div></div>
+    <div class="wx-card"><div class="place">海水温度</div><div class="temp">22~25℃</div><div class="desc">9月上旬仍可下水 · 早晚偏凉</div></div>
+  </div>
+</div>
+
+<div class="map-section">
+  <div class="map-card">
+    <div class="map-tabs" id="mapTabs">
+      <button class="map-tab active" onclick="switchMapDay(0)">DAY1 金沙滩</button>
+      <button class="map-tab" onclick="switchMapDay(1)">DAY2 珠山海岸</button>
+      <button class="map-tab" onclick="switchMapDay(2)">DAY3 老城区</button>
+      <button class="map-tab" onclick="switchMapDay(3)">DAY4 八大关</button>
+      <button class="map-tab" onclick="switchMapDay(4)">DAY5 返程</button>
+    </div>
+    <div class="map-body">
+      <div id="map-container" class="map-container">
+        <div class="map-legend">
+          <div class="lg-item"><span class="lg-dot lg-sight"></span>景点</div>
+          <div class="lg-item"><span class="lg-dot lg-food"></span>美食</div>
+          <div class="lg-item"><span class="lg-dot lg-culture"></span>文化</div>
+          <div class="lg-item"><span class="lg-dot lg-transport"></span>交通</div>
+          <div class="lg-item"><span class="lg-dot lg-hotel"></span>酒店</div>
+        </div>
+      </div>
+    </div>
+    <div class="map-note">💡 点击地图标记或行程卡片 → 地图飞行定位+信息窗；点击酒店输入框可搜索更换酒店；点击 DAY Tab 切换当日路线。</div>
+  </div>
+</div>
+
+<div class="section" id="itinerary-section">
+  <div class="section-title">每日行程（酒店可搜索更换）</div>
+  <div id="itinerary-content"></div>
+</div>
+
+<div class="section">
+  <div class="section-title">住宿推荐</div>
+  <div class="hotel-grid" id="hotelGrid"></div>
+  <div style="font-size:12px;color:var(--muted);margin-top:8px">💡 实际入住的酒店请到上方"每日行程"点击酒店名搜索更换</div>
+</div>
+
+<div class="section">
+  <div class="section-title">费用预估（2人 · 机票另计）</div>
+  <table class="budget-table">
+    <tr><th>项目</th><th>明细</th><th class="amt">金额</th></tr>
+    <tr><td>✈ 机票</td><td>长沙往返青岛，航班号、起降时间和价格按实际出票信息填写</td><td class="amt">另计</td></tr>
+    <tr><td>🚇 当地交通</td><td>D2西海岸打车环线约¥213，另含地铁、公交及其他短途打车缓冲</td><td class="amt">约¥500</td></tr>
+    <tr><td>🎫 门票</td><td>珠山¥60×2｜摩天轮¥60×2｜啤酒博物馆¥60×2｜信号山/小鱼山/小青岛各¥10×2｜天主教堂¥10×2</td><td class="amt">¥480</td></tr>
+    <tr><td>🏨 住宿</td><td>黄岛金沙滩3晚×¥420 + 老城区2晚×¥340（双床房，2人）</td><td class="amt">¥1,940</td></tr>
+    <tr><td>🍜 餐饮</td><td>海鲜大餐2天×¥300×2人 + 小吃/日常¥150×2人×3天（开渔季海鲜正肥）</td><td class="amt">¥2,100</td></tr>
+    <tr><td>🎒 杂项</td><td>雨具/防晒/零食/纪念品</td><td class="amt">¥200</td></tr>
+    <tr class="total"><td>合计（2人，不含机票）</td><td>门票、住宿与餐饮均为规划预算，实际以预订和现场公告为准</td><td class="amt">≈¥5,220</td></tr>
+  </table>
+</div>
+
+<div class="section">
+  <div class="section-title">通用实用贴士</div>
+  <div class="tips-grid">
+    <div class="tip-card"><div class="t-title">🌦 天气与穿搭</div><ul>
+      <li>当前预报显示8/28-29有阵雨，8/30-9/2以晴到多云为主；出发前一天再次查看短临预报</li>
+      <li>9月紫外线仍强：防晒+墨镜+薄外套（海边风大）</li>
+      <li>洋葱式穿衣：白天短袖，早晚海边加薄外套</li>
+      <li>金沙滩/八大关门票免费，啤酒博物馆/信号山票价10-60元</li>
+    </ul></div>
+    <div class="tip-card"><div class="t-title">🚇 交通细节</div><ul>
+      <li>黄岛↔老城区：地铁1号线跨海40min，比打车快且便宜</li>
+      <li>胶东机场→黄岛：机场大巴西海岸线约1.5h ¥50；打车约¥180</li>
+      <li>返程SC4875 17:50起飞，D5 13:30前必须出发去机场</li>
+      <li>老城区景点步行可达，台东夜市地铁2号线直达</li>
+    </ul></div>
+    <div class="tip-card"><div class="t-title">📷 摄影机位</div><ul>
+      <li>栈桥：从桥头回望老城，红瓦绿树碧海蓝天</li>
+      <li>大学路红墙：下午顺光，转角人像</li>
+      <li>鱼鸣嘴灯塔：下午顺光拍海崖+航迹</li>
+      <li>信号山：15:30上山等日落（约18:15）</li>
+      <li>琴屿路：小青岛方向网红弯道，清晨人少</li>
+    </ul></div>
+    <div class="tip-card"><div class="t-title">🍤 吃在青岛</div><ul>
+      <li>海鲜去团岛农贸市场现买现加工（加工费10-15元/斤）</li>
+      <li>劈柴院/台东夜市小吃：王姐烧烤、野馄饨、海胆蒸蛋</li>
+      <li>9月开渔季：梭子蟹、皮皮虾、鲅鱼水饺正当季</li>
+      <li>青岛啤酒配烤串，原浆只在啤酒博物馆/酒馆能喝到</li>
+    </ul></div>
+  </div>
+</div>
+
+<div class="footer">
+  数据来源：铁路12306/同程时刻表 · 中国天气网 · 各景区官方 · 腾讯位置服务<br>
+  生成时间：2026-08-21 · 旅行攻略生成V2 · 价格以出行当日为准
+</div>
+
+<script>
+/* ========== 常量 ========== */
+const CAT = { sight:'sight', food:'food', culture:'culture', shop:'shop', night:'night', transport:'transport', hotel:'hotel' };
+const CAT_CN = { sight:'景点', food:'美食', culture:'文化', shop:'购物', night:'夜生活', transport:'交通', hotel:'酒店' };
+const LS_HOTEL = 'guide_hotel_v3_';   // v3 隔离旧版坐标；{key} -> JSON {name, lat, lng, address, region}
+const LS_PAX = 'guide_pax';
+const HOTEL_SEARCH_KEY = '5EABZ-B546T-NTMXE-VU6OS-5BZE2-AYF3V'; // 与地图同key
+
+/* ========== 出行人数 ========== */
+let pax = parseInt(localStorage.getItem(LS_PAX) || '2');
+function setPax(n) {
+  pax = n;
+  try { localStorage.setItem(LS_PAX, String(n)); } catch(e){}
+  renderHotelRecs();
+}
+function getRoomType() { return pax >= 2 ? '双床房' : '大床房'; }
+
+/* ========== 住宿推荐数据 ========== */
+const HOTEL_RECS = [
+  { name:'青岛金沙滩希尔顿酒店', tag:'D0-D2 共3晚',
+    prices: { '大床房':'¥320-450', '双床房':'¥350-500' },
+    desc:'距金沙滩约300米，步行约10分钟。舒适轻松主题首选：睡到自然醒后步行去沙滩。3晚合计约¥1,050-1,500。' },
+  { name:'青岛栈桥海景美居酒店', tag:'D3-D4 共2晚',
+    prices: { '大床房':'¥260-400', '双床房':'¥280-450' },
+    desc:'距青岛站约1.6公里，前往栈桥、中山路、劈柴院和天主教堂方便，晚上逛台东方便。2晚合计约¥560-900。' }
+];
+function renderHotelRecs() {
+  const room = getRoomType();
+  document.getElementById('hotelGrid').innerHTML = HOTEL_RECS.map(h =>
+    '<div class="hotel-card2">' +
+    '<div class="h-name">' + h.name + '</div>' +
+    '<span class="h-tag">' + h.tag + '</span>' +
+    '<div class="h-price">' + (h.prices[room] || '') + '/晚</div>' +
+    '<div class="h-desc">' + h.desc + '</div>' +
+    '</div>'
+  ).join('');
+}
+
+/* ========== 行程数据 ========== */
+const VERIFIED_MAP_DATA = {"meta":{"coordSystem":"GCJ-02","source":"腾讯位置服务 WebService API","verifiedAt":"2026-08-21","poiCount":28,"routeLegCount":32},"pois":{"hotel_hilton":{"key":"hotel_hilton","name":"青岛金沙滩希尔顿酒店","poiId":"1595649670454075004","address":"薛家岛街道嘉陵江东路1号","lat":35.957364,"lng":120.236896,"category":"酒店宾馆:星级酒店","reverseAddress":"山东省青岛市黄岛区嘉陵江东路","reverseStandardAddress":"山东省青岛市黄岛区薛家岛街道嘉陵江东路1号","coordSystem":"GCJ-02","source":"腾讯位置服务 WebService API","verifiedAt":"2026-08-21"},"hotel_mercure":{"key":"hotel_mercure","name":"青岛栈桥海景美居酒店","poiId":"2535493160864338784","address":"瞿塘峡路30号","lat":36.053922,"lng":120.30609,"category":"酒店宾馆:其它酒店宾馆","reverseAddress":"山东省青岛市市南区巫峡路23号","reverseStandardAddress":"山东省青岛市市南区巫峡路29号惠国宾馆","coordSystem":"GCJ-02","source":"腾讯位置服务 WebService API","verifiedAt":"2026-08-21"},"golden_beach":{"key":"golden_beach","name":"金沙滩景区","poiId":"10591761777476318692","address":"金沙滩路旁","lat":35.953752,"lng":120.239936,"category":"旅游景点:海滩","reverseAddress":"山东省青岛市黄岛区星光大道","reverseStandardAddress":"山东省青岛市黄岛区金沙滩路旁","coordSystem":"GCJ-02","source":"腾讯位置服务 WebService API","verifiedAt":"2026-08-21"},"ferris_wheel":{"key":"ferris_wheel","name":"琴岛之星摩天轮","poiId":"12645257373442448975","address":"经济技术开发区漓江西路1138号","lat":35.933839,"lng":120.174393,"category":"娱乐休闲:户外活动:游乐场","reverseAddress":"山东省青岛市黄岛区时尚大道","reverseStandardAddress":"山东省青岛市黄岛区经济技术开发区漓江西路1138号","coordSystem":"GCJ-02","source":"腾讯位置服务 WebService API","verifiedAt":"2026-08-21"},"wetland":{"key":"wetland","name":"青岛唐岛湾国家湿地公园","poiId":"18371819449404519097","address":"漓江西路674号唐岛湾景区","lat":35.922932,"lng":120.195555,"category":"旅游景点:公园","reverseAddress":"山东省青岛市黄岛区银沙滩路","reverseStandardAddress":"山东省青岛市黄岛区薛家岛街道漓江西路674号唐岛湾景区唐岛湾公园内唐岛湾南岸公园","coordSystem":"GCJ-02","source":"腾讯位置服务 WebService API","verifiedAt":"2026-08-21"},"beer_city":{"key":"beer_city","name":"青岛西海岸金沙滩啤酒城","poiId":"4032658715052420192","address":"金沙滩路万人文化广场","lat":35.952339,"lng":120.239091,"category":"旅游景点:其它旅游景点","reverseAddress":"山东省青岛市黄岛区酒吧街西9号","reverseStandardAddress":"山东省青岛市黄岛区金沙滩路万人文化广场","coordSystem":"GCJ-02","source":"腾讯位置服务 WebService API","verifiedAt":"2026-08-21"},"zhushan_visitor":{"key":"zhushan_visitor","name":"青岛珠山国家森林公园游客中心","poiId":"7388117850237771939","address":"灵珠山街道小珠山路2号青岛珠山国家森林公园内(西侧)","lat":35.983688,"lng":120.063661,"category":"旅游景点:景点公园附属","reverseAddress":"山东省青岛市黄岛区小珠山路","reverseStandardAddress":"山东省青岛市黄岛区灵珠山街道小珠山路2号青岛珠山国家森林公园内(西侧)","coordSystem":"GCJ-02","source":"腾讯位置服务 WebService API","verifiedAt":"2026-08-21"},"fish_mouth":{"key":"fish_mouth","name":"鱼鸣嘴村","poiId":"13177482213998931067","address":"九连山路凤凰岛旅游度假区","lat":35.895326,"lng":120.176965,"category":"旅游景点:其它旅游景点","reverseAddress":"山东省青岛市黄岛区银沙滩路","reverseStandardAddress":"山东省青岛市黄岛区九连山路凤凰岛旅游度假区","coordSystem":"GCJ-02","source":"腾讯位置服务 WebService API","verifiedAt":"2026-08-21"},"red_forest":{"key":"red_forest","name":"青岛红树林度假世界","poiId":"17837678358925111048","address":"隐珠街道滨海大道3588号","lat":35.880969,"lng":120.062035,"category":"酒店宾馆:度假村","reverseAddress":"山东省青岛市黄岛区滨海大道","reverseStandardAddress":"山东省青岛市黄岛区隐珠街道滨海大道3588号","coordSystem":"GCJ-02","source":"腾讯位置服务 WebService API","verifiedAt":"2026-08-21"},"wetland_south":{"key":"wetland_south","name":"唐岛湾南岸湿地公园工会驿站","poiId":"9575359031415824588","address":"薛家岛街道银沙滩路唐岛湾青岛唐岛湾国家湿地公园","lat":35.932676,"lng":120.204196,"category":"生活服务:生活服务场所","reverseAddress":"山东省青岛市黄岛区","reverseStandardAddress":"山东省青岛市黄岛区","coordSystem":"GCJ-02","source":"腾讯位置服务 WebService API","verifiedAt":"2026-08-21"},"tianmushan_metro":{"key":"tianmushan_metro","name":"天目山路[地铁站]","poiId":"2199031474284","address":"地铁1号线","lat":35.965066,"lng":120.22849,"category":"基础设施:交通设施:地铁站","reverseAddress":"山东省青岛市黄岛区长江东路","reverseStandardAddress":"天目山路地铁站","coordSystem":"GCJ-02","source":"腾讯位置服务 WebService API","verifiedAt":"2026-08-21"},"qingdao_metro":{"key":"qingdao_metro","name":"青岛站[地铁站]","poiId":"11388972921162113891","address":"地铁3号线,地铁1号线","lat":36.063672,"lng":120.315264,"category":"基础设施:交通设施:地铁站","reverseAddress":"山东省青岛市市南区广西路63号","reverseStandardAddress":"青岛站地铁站","coordSystem":"GCJ-02","source":"腾讯位置服务 WebService API","verifiedAt":"2026-08-21"},"huilange":{"key":"huilange","name":"栈桥景区-回澜阁","poiId":"7628059677208747758","address":"太平路12号栈桥公园","lat":36.058479,"lng":120.320447,"category":"旅游景点:风景名胜","reverseAddress":"山东省青岛市市南区","reverseStandardAddress":"山东省青岛市市南区太平路12号栈桥公园","coordSystem":"GCJ-02","source":"腾讯位置服务 WebService API","verifiedAt":"2026-08-21"},"pichaiyuan":{"key":"pichaiyuan","name":"劈柴院","poiId":"11869098832950869479","address":"中山路","lat":36.07135,"lng":120.31801,"category":"美食:其它美食","reverseAddress":"山东省青岛市市南区江宁路44号","reverseStandardAddress":"山东省青岛市市南区中山路","coordSystem":"GCJ-02","source":"腾讯位置服务 WebService API","verifiedAt":"2026-08-21"},"st_michael":{"key":"st_michael","name":"圣弥厄尔大教堂","poiId":"11345520944615986699","address":"浙江路15号(曲阜路路口)","lat":36.068193,"lng":120.320645,"category":"旅游景点:教堂","reverseAddress":"山东省青岛市市南区浙江路28号","reverseStandardAddress":"山东省青岛市市南区浙江路15号(曲阜路路口)","coordSystem":"GCJ-02","source":"腾讯位置服务 WebService API","verifiedAt":"2026-08-21"},"university_yushan":{"key":"university_yushan","name":"大学路与鱼山路交叉口","poiId":"3573600078027339396","address":"山东省青岛市市南区","lat":36.06135,"lng":120.331335,"category":"基础设施:道路附属:路口","reverseAddress":"山东省青岛市市南区大学路4号","reverseStandardAddress":"山东省青岛市市南区","coordSystem":"GCJ-02","source":"腾讯位置服务 WebService API","verifiedAt":"2026-08-21"},"tuandao_market":{"key":"tuandao_market","name":"团岛农贸市场","poiId":"16080544515060809131","address":"四川路金茂湾11号楼旁边","lat":36.061195,"lng":120.298227,"category":"购物:农贸市场","reverseAddress":"山东省青岛市市南区团岛四路","reverseStandardAddress":"山东省青岛市市南区四川路金茂湾11号楼旁边","coordSystem":"GCJ-02","source":"腾讯位置服务 WebService API","verifiedAt":"2026-08-21"},"badaguan":{"key":"badaguan","name":"八大关景区","poiId":"2021539226410630454","address":"武胜关支路10号市南区汇泉角东北部","lat":36.053221,"lng":120.351081,"category":"旅游景点:国家级景点","reverseAddress":"山东省青岛市市南区宁武关路","reverseStandardAddress":"山东省青岛市市南区武胜关支路10号市南区汇泉角东北部","coordSystem":"GCJ-02","source":"腾讯位置服务 WebService API","verifiedAt":"2026-08-21"},"princess_house":{"key":"princess_house","name":"公主楼","poiId":"17052745200327431645","address":"八大关街道南区居庸关路10号八大关风景区内","lat":36.05251,"lng":120.349537,"category":"旅游景点:其它旅游景点","reverseAddress":"山东省青岛市市南区居庸关路10号","reverseStandardAddress":"山东省青岛市市南区八大关街道南区居庸关路10号八大关风景区内","coordSystem":"GCJ-02","source":"腾讯位置服务 WebService API","verifiedAt":"2026-08-21"},"huashi_house":{"key":"huashi_house","name":"花石楼","poiId":"14870263640209079386","address":"八大关街道黄海路18号八大关风景区内(近正阳关路)","lat":36.050242,"lng":120.353497,"category":"旅游景点:风景名胜","reverseAddress":"山东省青岛市市南区山海关路","reverseStandardAddress":"山东省青岛市市南区八大关街道黄海路18号八大关风景区内(近正阳关路)","coordSystem":"GCJ-02","source":"腾讯位置服务 WebService API","verifiedAt":"2026-08-21"},"second_beach":{"key":"second_beach","name":"第二海水浴场","poiId":"13908766814718643658","address":"八大关街道山海关路6号(近花石楼)","lat":36.050563,"lng":120.350874,"category":"运动健身:海滨浴场","reverseAddress":"山东省青岛市市南区山海关路","reverseStandardAddress":"山东省青岛市市南区武胜关支路10号市南区汇泉角东北部","coordSystem":"GCJ-02","source":"腾讯位置服务 WebService API","verifiedAt":"2026-08-21"},"signal_hill":{"key":"signal_hill","name":"青岛信号山公园","poiId":"4224177601387934885","address":"龙山路16号甲","lat":36.066463,"lng":120.331554,"category":"旅游景点:公园","reverseAddress":"山东省青岛市市南区信号山路","reverseStandardAddress":"山东省青岛市市南区龙山路16号甲","coordSystem":"GCJ-02","source":"腾讯位置服务 WebService API","verifiedAt":"2026-08-21"},"beer_museum":{"key":"beer_museum","name":"青岛啤酒博物馆","poiId":"1660788800540182481","address":"登州路56号","lat":36.079075,"lng":120.34711,"category":"文化场馆:博物馆","reverseAddress":"山东省青岛市市北区登州路56-2号","reverseStandardAddress":"山东省青岛市市北区登州路56号","coordSystem":"GCJ-02","source":"腾讯位置服务 WebService API","verifiedAt":"2026-08-21"},"taidong":{"key":"taidong","name":"威海路步行街","poiId":"5631176797827133182","address":"台东四路","lat":36.084481,"lng":120.352893,"category":"购物:商业步行街","reverseAddress":"山东省青岛市市北区台东三路10号","reverseStandardAddress":"山东省青岛市市北区台东四路","coordSystem":"GCJ-02","source":"腾讯位置服务 WebService API","verifiedAt":"2026-08-21"},"xiaoyushan":{"key":"xiaoyushan","name":"小鱼山公园","poiId":"14417225587017870531","address":"福山支路24号","lat":36.058837,"lng":120.336498,"category":"旅游景点:公园","reverseAddress":"山东省青岛市市南区鱼山路","reverseStandardAddress":"山东省青岛市市南区福山支路24号","coordSystem":"GCJ-02","source":"腾讯位置服务 WebService API","verifiedAt":"2026-08-21"},"luxun_park":{"key":"luxun_park","name":"鲁迅公园","poiId":"690628612386719797","address":"八大关街道琴屿路1号","lat":36.055011,"lng":120.33318,"category":"旅游景点:公园","reverseAddress":"山东省青岛市市南区莱阳路","reverseStandardAddress":"山东省青岛市市南区八大关街道琴屿路1号","coordSystem":"GCJ-02","source":"腾讯位置服务 WebService API","verifiedAt":"2026-08-21"},"xiaoqingdao":{"key":"xiaoqingdao","name":"小青岛公园","poiId":"13704612542656233539","address":"琴屿路26号","lat":36.053059,"lng":120.32392,"category":"旅游景点:公园","reverseAddress":"山东省青岛市市南区琴屿路26号","reverseStandardAddress":"山东省青岛市市南区琴屿路26号","coordSystem":"GCJ-02","source":"腾讯位置服务 WebService API","verifiedAt":"2026-08-21"},"airport":{"key":"airport","name":"青岛胶东国际机场","poiId":"6508611918117603771","address":"胶东街道前店口村机场路","lat":36.359212,"lng":120.094125,"category":"基础设施:交通设施:飞机场","reverseAddress":"山东省青岛市胶州市金航一路","reverseStandardAddress":"山东省青岛市胶州市综合交通中心1层","coordSystem":"GCJ-02","source":"腾讯位置服务 WebService API","verifiedAt":"2026-08-21"}},"routePlans":{"day1":[{"fromKey":"hotel_hilton","toKey":"golden_beach","fromName":"青岛金沙滩希尔顿酒店","toName":"金沙滩景区","mode":"walking","distanceM":1140,"durationMin":17,"priceFen":null,"taxiFareYuan":null,"transportText":"步行 1.1km，约 17 分钟","path":[[35.957843,120.236813],[35.957905,120.23652],[35.958194,120.236505],[35.958666,120.236087],[35.958697,120.235832],[35.957423,120.233909],[35.955409,120.236884],[35.955354,120.237195],[35.955143,120.237175],[35.954614,120.237728],[35.953501,120.239158],[35.953984,120.239831],[35.953835,120.240031]],"source":"腾讯位置服务 WebService API","verifiedAt":"2026-08-21"},{"fromKey":"golden_beach","toKey":"beer_city","fromName":"金沙滩景区","toName":"青岛西海岸金沙滩啤酒城","mode":"walking","distanceM":193,"durationMin":3,"priceFen":null,"taxiFareYuan":null,"transportText":"步行 193m，约 3 分钟","path":[[35.953668,120.240047],[35.952935,120.239168],[35.952403,120.238948],[35.952399,120.239093]],"source":"腾讯位置服务 WebService API","verifiedAt":"2026-08-21"},{"fromKey":"beer_city","toKey":"ferris_wheel","fromName":"青岛西海岸金沙滩啤酒城","toName":"琴岛之星摩天轮","mode":"transit","distanceM":10969,"durationMin":65,"priceFen":300,"taxiFareYuan":null,"transportText":"公共交通 11.0km，约 65 分钟，腾讯预估 ¥3/人","path":[[35.952399,120.239093],[35.952403,120.238948],[35.952935,120.239168],[35.953155,120.239521],[35.953501,120.239158],[35.955143,120.237175],[35.958572,120.23211],[35.965002,120.22935],[35.965192,120.228861],[35.965144,120.22875],[35.964978,120.228855],[35.964929,120.228728],[35.965116,120.228608],[35.962439,120.222595],[35.962039,120.221412],[35.959955,120.211714],[35.957504,120.195612],[35.956195,120.192718],[35.953998,120.18728],[35.946339,120.192397],[35.945897,120.192607],[35.945583,120.19262],[35.945399,120.192461],[35.942901,120.187183],[35.938842,120.179851],[35.934818,120.171619],[35.931581,120.167311],[35.931243,120.166382],[35.93093,120.164914],[35.931027,120.165391],[35.931314,120.165306],[35.931509,120.166024],[35.931384,120.166099],[35.931979,120.167319],[35.931776,120.16747],[35.932901,120.169113],[35.932815,120.16931],[35.9343,120.171021],[35.933851,120.172752],[35.93366,120.174058]],"source":"腾讯位置服务 WebService API","verifiedAt":"2026-08-21"},{"fromKey":"ferris_wheel","toKey":"wetland","fromName":"琴岛之星摩天轮","toName":"青岛唐岛湾国家湿地公园","mode":"driving","distanceM":8953,"durationMin":17,"priceFen":null,"taxiFareYuan":21,"transportText":"驾车/打车 9.0km，约 17 分钟，腾讯预估打车约 ¥21","path":[[35.935038,120.173716],[35.935354,120.174216],[35.935876,120.17385],[35.938257,120.178943],[35.942456,120.186531],[35.945317,120.192722],[35.947091,120.197285],[35.949067,120.203348],[35.950301,120.20798],[35.951976,120.215655],[35.946209,120.217143],[35.944921,120.217714],[35.943203,120.218694],[35.938584,120.21699],[35.936123,120.215519],[35.9346,120.214239],[35.931063,120.209954],[35.927879,120.207285],[35.925775,120.205176],[35.920694,120.196633],[35.921506,120.196305],[35.921949,120.195731],[35.922547,120.195581],[35.922746,120.195922],[35.922961,120.195858],[35.92293,120.195582]],"source":"腾讯位置服务 WebService API","verifiedAt":"2026-08-21"},{"fromKey":"wetland","toKey":"hotel_hilton","fromName":"青岛唐岛湾国家湿地公园","toName":"青岛金沙滩希尔顿酒店","mode":"transit","distanceM":7180,"durationMin":50,"priceFen":100,"taxiFareYuan":null,"transportText":"公共交通 7.2km，约 50 分钟，腾讯预估 ¥1/人","path":[[35.922929,120.195581],[35.92296,120.195858],[35.922746,120.195922],[35.922546,120.19558],[35.921949,120.195731],[35.921506,120.196304],[35.920693,120.196633],[35.920904,120.197088],[35.918103,120.199606],[35.919333,120.200406],[35.920753,120.202352],[35.922859,120.204215],[35.923421,120.204926],[35.924773,120.207767],[35.925844,120.211452],[35.926473,120.21308],[35.927178,120.214407],[35.928299,120.21598],[35.929781,120.217451],[35.937921,120.223669],[35.948115,120.233995],[35.948821,120.234173],[35.949331,120.234015],[35.951783,120.231761],[35.954558,120.230129],[35.955229,120.231175],[35.955407,120.231666],[35.955504,120.23302],[35.956055,120.23349],[35.956407,120.233421],[35.956718,120.23386],[35.957126,120.234164],[35.957415,120.233741],[35.957499,120.234035],[35.958697,120.235832],[35.958666,120.236087],[35.958194,120.236505],[35.957905,120.23652],[35.957843,120.236813]],"source":"腾讯位置服务 WebService API","verifiedAt":"2026-08-21"}],"day2":[{"fromKey":"hotel_hilton","toKey":"zhushan_visitor","fromName":"青岛金沙滩希尔顿酒店","toName":"青岛珠山国家森林公园游客中心","mode":"driving","distanceM":25367,"durationMin":44,"priceFen":null,"taxiFareYuan":71,"transportText":"驾车/打车 25.4km，约 44 分钟，腾讯预估打车约 ¥71","path":[[35.957844,120.236814],[35.957987,120.236984],[35.958202,120.236924],[35.958251,120.236578],[35.958708,120.236159],[35.958921,120.236188],[35.958998,120.236014],[35.957532,120.233748],[35.958519,120.232356],[35.965542,120.229227],[35.968706,120.227139],[35.96933,120.226436],[35.969825,120.2256],[35.970205,120.224536],[35.970355,120.223692],[35.970318,120.222027],[35.969964,120.220779],[35.968123,120.216017],[35.968354,120.215495],[35.969479,120.215204],[35.970227,120.215174],[35.973127,120.216147],[35.974792,120.216355],[35.977685,120.216126],[35.985722,120.216138],[35.985857,120.215982],[35.985195,120.203627],[35.985279,120.201906],[35.985585,120.200407],[35.986085,120.199044],[35.987241,120.197129],[35.988238,120.196084],[35.997097,120.189028],[35.998365,120.188276],[36.006636,120.184051],[36.007536,120.183905],[36.008486,120.184166],[36.010658,120.18588],[36.011368,120.186257],[36.012175,120.186365],[36.013015,120.186134],[36.022145,120.179024],[36.022474,120.178937],[36.024036,120.177708],[36.024468,120.177101],[36.025195,120.176534],[36.025241,120.176159],[36.024713,120.173624],[36.020567,120.155042],[36.019002,120.142877],[36.017664,120.129755],[36.015206,120.107888],[36.01516,120.098149],[36.01544,120.096376],[36.016424,120.093068],[36.016547,120.091409],[36.016467,120.090243],[36.015816,120.086569],[36.014933,120.072673],[36.014202,120.067938],[36.012306,120.064978],[36.011977,120.06472],[36.011688,120.064649],[36.008853,120.065644],[36.008214,120.065563],[36.007709,120.065288],[36.002724,120.059984],[36.002249,120.059591],[36.001663,120.05939],[36.00073,120.059437],[35.9971,120.060074],[35.996004,120.060797],[35.991437,120.063178],[35.989309,120.063879],[35.987792,120.064098],[35.984829,120.063565],[35.984444,120.063387],[35.983933,120.063546],[35.983891,120.063677]],"source":"腾讯位置服务 WebService API","verifiedAt":"2026-08-21"},{"fromKey":"zhushan_visitor","toKey":"red_forest","fromName":"青岛珠山国家森林公园游客中心","toName":"青岛红树林度假世界","mode":"driving","distanceM":17729,"durationMin":29,"priceFen":null,"taxiFareYuan":43,"transportText":"驾车/打车 17.7km，约 29 分钟，腾讯预估打车约 ¥43","path":[[35.983891,120.063677],[35.983934,120.063849],[35.984829,120.063565],[35.985677,120.063646],[35.988119,120.06419],[35.988725,120.064142],[35.991438,120.063389],[35.99607,120.060984],[35.994775,120.057157],[35.99437,120.054936],[35.993114,120.0538],[35.991635,120.052895],[35.988647,120.049089],[35.988376,120.048562],[35.988016,120.046655],[35.984935,120.04229],[35.983495,120.039728],[35.981492,120.038975],[35.979716,120.038931],[35.978504,120.038277],[35.97639,120.037913],[35.973777,120.037855],[35.971911,120.037468],[35.966213,120.03876],[35.964693,120.038613],[35.961793,120.03894],[35.956836,120.040237],[35.956408,120.040958],[35.95277,120.050428],[35.95087,120.05247],[35.949388,120.053689],[35.948746,120.054024],[35.94633,120.055812],[35.941757,120.055852],[35.929771,120.0535],[35.929157,120.053036],[35.923529,120.047044],[35.922876,120.046549],[35.917885,120.047387],[35.917662,120.047051],[35.917224,120.04706],[35.913695,120.047756],[35.912805,120.048213],[35.906974,120.052231],[35.906446,120.052948],[35.90505,120.055948],[35.904465,120.056593],[35.886727,120.067624],[35.886282,120.067406],[35.884982,120.064307],[35.884234,120.062876],[35.88366,120.062095],[35.88095,120.059114],[35.880697,120.059511],[35.881698,120.060553],[35.88213,120.06136],[35.881214,120.063111]],"source":"腾讯位置服务 WebService API","verifiedAt":"2026-08-21"},{"fromKey":"red_forest","toKey":"fish_mouth","fromName":"青岛红树林度假世界","toName":"鱼鸣嘴村","mode":"driving","distanceM":24378,"durationMin":36,"priceFen":null,"taxiFareYuan":67,"transportText":"驾车/打车 24.4km，约 36 分钟，腾讯预估打车约 ¥67","path":[[35.881522,120.061721],[35.881759,120.061978],[35.882122,120.061456],[35.881698,120.060553],[35.883083,120.062042],[35.883221,120.06185],[35.883545,120.062217],[35.884594,120.063856],[35.890102,120.076955],[35.895229,120.08996],[35.896342,120.092266],[35.905991,120.106185],[35.914481,120.116688],[35.915452,120.117969],[35.91628,120.119409],[35.916807,120.120691],[35.923755,120.141736],[35.926301,120.146906],[35.927733,120.151151],[35.929691,120.155681],[35.930087,120.157739],[35.930401,120.163587],[35.930613,120.164854],[35.931123,120.166577],[35.93212,120.168415],[35.9343,120.171021],[35.935317,120.172624],[35.93766,120.177776],[35.942178,120.185989],[35.945235,120.192529],[35.947091,120.197285],[35.949067,120.203348],[35.950301,120.20798],[35.951976,120.215655],[35.946209,120.217143],[35.944921,120.217714],[35.943203,120.218694],[35.938584,120.21699],[35.93625,120.215606],[35.9346,120.214239],[35.931063,120.209954],[35.927879,120.207285],[35.925894,120.205342],[35.92001,120.195539],[35.918308,120.193488],[35.915947,120.190986],[35.914022,120.188283],[35.913204,120.187405],[35.906967,120.182092],[35.903467,120.179564],[35.897683,120.177576],[35.897073,120.17779],[35.895763,120.178846],[35.895597,120.177065],[35.895346,120.177116]],"source":"腾讯位置服务 WebService API","verifiedAt":"2026-08-21"},{"fromKey":"fish_mouth","toKey":"wetland_south","fromName":"鱼鸣嘴村","toName":"唐岛湾南岸湿地公园工会驿站","mode":"driving","distanceM":6678,"durationMin":17,"priceFen":null,"taxiFareYuan":17,"transportText":"驾车/打车 6.7km，约 17 分钟，腾讯预估打车约 ¥17","path":[[35.895346,120.177116],[35.895597,120.177065],[35.895438,120.175702],[35.894599,120.175865],[35.894688,120.176763],[35.895132,120.177584],[35.895718,120.178317],[35.895763,120.178846],[35.89512,120.179042],[35.894019,120.179046],[35.893486,120.179347],[35.892984,120.180215],[35.893048,120.181242],[35.894161,120.183072],[35.894819,120.185369],[35.895206,120.186195],[35.895953,120.186986],[35.898355,120.188434],[35.899034,120.188969],[35.899759,120.189954],[35.900579,120.191717],[35.901286,120.192506],[35.902437,120.193103],[35.904621,120.193106],[35.905913,120.193683],[35.906764,120.194568],[35.907778,120.196629],[35.908397,120.197459],[35.909441,120.198256],[35.910438,120.198611],[35.911268,120.198652],[35.913035,120.198441],[35.914473,120.198486],[35.916418,120.198897],[35.918103,120.199606],[35.920905,120.197089],[35.925677,120.205159],[35.927695,120.207218],[35.931359,120.204385],[35.931428,120.204514],[35.931879,120.204179],[35.931812,120.204059]],"source":"腾讯位置服务 WebService API","verifiedAt":"2026-08-21"},{"fromKey":"wetland_south","toKey":"hotel_hilton","fromName":"唐岛湾南岸湿地公园工会驿站","toName":"青岛金沙滩希尔顿酒店","mode":"driving","distanceM":5560,"durationMin":12,"priceFen":null,"taxiFareYuan":15,"transportText":"驾车/打车 5.6km，约 12 分钟，腾讯预估打车约 ¥15","path":[[35.932123,120.204638],[35.931812,120.204059],[35.927695,120.207218],[35.930969,120.209944],[35.934553,120.214294],[35.936087,120.215587],[35.93872,120.217135],[35.943683,120.218936],[35.944281,120.219313],[35.945871,120.221834],[35.947362,120.224616],[35.955143,120.237175],[35.957423,120.23391],[35.958697,120.235833],[35.958667,120.236088],[35.958195,120.236505],[35.957906,120.23652],[35.957844,120.236814]],"source":"腾讯位置服务 WebService API","verifiedAt":"2026-08-21"}],"day3":[{"fromKey":"hotel_hilton","toKey":"tianmushan_metro","fromName":"青岛金沙滩希尔顿酒店","toName":"天目山路[地铁站]","mode":"walking","distanceM":1428,"durationMin":22,"priceFen":null,"taxiFareYuan":null,"transportText":"步行 1.4km，约 22 分钟","path":[[35.957843,120.236813],[35.957905,120.23652],[35.958194,120.236505],[35.958666,120.236087],[35.958697,120.235832],[35.957499,120.234035],[35.957415,120.233741],[35.95844,120.232232],[35.965002,120.22935],[35.965192,120.228861],[35.965041,120.228505]],"source":"腾讯位置服务 WebService API","verifiedAt":"2026-08-21"},{"fromKey":"tianmushan_metro","toKey":"qingdao_metro","fromName":"天目山路[地铁站]","toName":"青岛站[地铁站]","mode":"transit","distanceM":16790,"durationMin":30,"priceFen":400,"taxiFareYuan":null,"transportText":"公共交通 16.8km，约 30 分钟，腾讯预估 ¥4/人","path":[[35.965066,120.22849],[35.965465,120.229384],[35.96579,120.229793],[35.970134,120.232555],[35.973456,120.234978],[35.974374,120.235881],[35.974829,120.236616],[35.974987,120.237696],[35.97482,120.238669],[35.973011,120.244104],[35.971511,120.249193],[35.971298,120.250893],[35.971474,120.252659],[35.971826,120.253961],[35.972515,120.255441],[35.975779,120.260185],[35.976757,120.261971],[35.978611,120.266086],[35.979634,120.269178],[35.980421,120.272332],[35.981119,120.27563],[35.981376,120.277323],[35.981494,120.279451],[35.981886,120.281465],[35.982287,120.282684],[35.983097,120.284393],[35.984259,120.286055],[35.985049,120.286932],[35.988643,120.289212],[35.9965,120.292674],[35.998188,120.293197],[36.001787,120.29326],[36.003714,120.293159],[36.013169,120.290734],[36.019981,120.29039],[36.027668,120.289816],[36.039555,120.289361],[36.042786,120.289606],[36.051284,120.291669],[36.052981,120.292441],[36.054327,120.293657],[36.054962,120.294822],[36.056711,120.299261],[36.058226,120.301805],[36.060441,120.304804],[36.061825,120.30814],[36.062315,120.310949],[36.063033,120.313705],[36.063332,120.314048],[36.064169,120.314547],[36.063908,120.314391],[36.06385,120.314607],[36.063679,120.314609],[36.063678,120.315693],[36.063467,120.315696],[36.06347,120.315881],[36.063277,120.315857],[36.063449,120.315172],[36.06363,120.315154],[36.063639,120.315264]],"source":"腾讯位置服务 WebService API","verifiedAt":"2026-08-21"},{"fromKey":"qingdao_metro","toKey":"hotel_mercure","fromName":"青岛站[地铁站]","toName":"青岛栈桥海景美居酒店","mode":"walking","distanceM":1630,"durationMin":25,"priceFen":null,"taxiFareYuan":null,"transportText":"步行 1.6km，约 25 分钟","path":[[36.063771,120.315266],[36.063677,120.314989],[36.063412,120.31478],[36.062587,120.311971],[36.062663,120.311543],[36.062366,120.31126],[36.061606,120.311268],[36.060606,120.308212],[36.060187,120.307778],[36.059093,120.307156],[36.058522,120.306222],[36.056389,120.306596],[36.056347,120.306395],[36.055143,120.305954],[36.053987,120.306366]],"source":"腾讯位置服务 WebService API","verifiedAt":"2026-08-21"},{"fromKey":"hotel_mercure","toKey":"tuandao_market","fromName":"青岛栈桥海景美居酒店","toName":"团岛农贸市场","mode":"walking","distanceM":1328,"durationMin":20,"priceFen":null,"taxiFareYuan":null,"transportText":"步行 1.3km，约 20 分钟","path":[[36.053987,120.306366],[36.055143,120.305954],[36.056347,120.306395],[36.056359,120.30531],[36.056652,120.303611],[36.056635,120.301929],[36.056872,120.301312],[36.059265,120.299323],[36.060141,120.298868],[36.060354,120.298993],[36.060746,120.298199],[36.061154,120.298089]],"source":"腾讯位置服务 WebService API","verifiedAt":"2026-08-21"},{"fromKey":"tuandao_market","toKey":"huilange","fromName":"团岛农贸市场","toName":"栈桥景区-回澜阁","mode":"driving","distanceM":2900,"durationMin":14,"priceFen":null,"taxiFareYuan":10,"transportText":"驾车/打车 2.9km，约 14 分钟，腾讯预估打车约 ¥10","path":[[36.061047,120.297858],[36.060691,120.298059],[36.060521,120.297823],[36.060142,120.298868],[36.058892,120.29959],[36.056872,120.301312],[36.056631,120.301988],[36.056652,120.303612],[36.056359,120.305311],[36.056347,120.306395],[36.056799,120.30764],[36.058142,120.309381],[36.058457,120.310861],[36.05899,120.311409],[36.05947,120.312194],[36.060046,120.312574],[36.061004,120.312783],[36.061311,120.312986],[36.061732,120.313669],[36.062206,120.315171],[36.063412,120.314781],[36.062328,120.321248]],"source":"腾讯位置服务 WebService API","verifiedAt":"2026-08-21"},{"fromKey":"huilange","toKey":"st_michael","fromName":"栈桥景区-回澜阁","toName":"圣弥厄尔大教堂","mode":"walking","distanceM":1157,"durationMin":18,"priceFen":null,"taxiFareYuan":null,"transportText":"步行 1.2km，约 18 分钟","path":[[36.058476,120.320433],[36.06227,120.319078],[36.062514,120.320081],[36.066243,120.32019],[36.067552,120.320512],[36.067997,120.32092]],"source":"腾讯位置服务 WebService API","verifiedAt":"2026-08-21"},{"fromKey":"st_michael","toKey":"pichaiyuan","fromName":"圣弥厄尔大教堂","toName":"劈柴院","mode":"walking","distanceM":506,"durationMin":8,"priceFen":null,"taxiFareYuan":null,"transportText":"步行 506m，约 8 分钟","path":[[36.068499,120.320909],[36.069182,120.319702],[36.071361,120.319478],[36.071258,120.318035]],"source":"腾讯位置服务 WebService API","verifiedAt":"2026-08-21"},{"fromKey":"pichaiyuan","toKey":"university_yushan","fromName":"劈柴院","toName":"大学路与鱼山路交叉口","mode":"walking","distanceM":1908,"durationMin":29,"priceFen":null,"taxiFareYuan":null,"transportText":"步行 1.9km，约 29 分钟","path":[[36.071258,120.318035],[36.071514,120.321111],[36.071864,120.322854],[36.069924,120.32374],[36.069023,120.324581],[36.067738,120.326221],[36.066001,120.327332],[36.066162,120.327883],[36.065588,120.328819],[36.065002,120.32916],[36.063801,120.329473],[36.062345,120.330703],[36.061348,120.331331]],"source":"腾讯位置服务 WebService API","verifiedAt":"2026-08-21"},{"fromKey":"university_yushan","toKey":"hotel_mercure","fromName":"大学路与鱼山路交叉口","toName":"青岛栈桥海景美居酒店","mode":"driving","distanceM":3300,"durationMin":15,"priceFen":null,"taxiFareYuan":11,"transportText":"驾车/打车 3.3km，约 15 分钟，腾讯预估打车约 ¥11","path":[[36.061349,120.331332],[36.062512,120.330577],[36.061961,120.327811],[36.062413,120.326429],[36.063804,120.318961],[36.063774,120.315166],[36.063412,120.314781],[36.062367,120.31126],[36.061606,120.311268],[36.06082,120.30867],[36.057154,120.310427],[36.054505,120.306178],[36.053933,120.306386],[36.053819,120.306263]],"source":"腾讯位置服务 WebService API","verifiedAt":"2026-08-21"}],"day4":[{"fromKey":"hotel_mercure","toKey":"badaguan","fromName":"青岛栈桥海景美居酒店","toName":"八大关景区","mode":"transit","distanceM":6951,"durationMin":50,"priceFen":200,"taxiFareYuan":null,"transportText":"公共交通 7.0km，约 50 分钟，腾讯预估 ¥2/人","path":[[36.053987,120.306366],[36.055143,120.305954],[36.056347,120.306395],[36.056483,120.304667],[36.056342,120.305463],[36.056376,120.306604],[36.056862,120.307747],[36.058055,120.30921],[36.058465,120.310887],[36.059628,120.312337],[36.059679,120.312687],[36.059484,120.313127],[36.060414,120.313513],[36.061494,120.313242],[36.061812,120.313862],[36.062208,120.315189],[36.063418,120.314744],[36.06187,120.323734],[36.061138,120.327501],[36.060929,120.32807],[36.059486,120.330085],[36.055577,120.330753],[36.055205,120.330905],[36.05499,120.331318],[36.054976,120.331939],[36.055495,120.333303],[36.057767,120.336976],[36.058468,120.338402],[36.059549,120.343175],[36.060876,120.348269],[36.060819,120.349426],[36.060538,120.35004],[36.060082,120.350588],[36.059092,120.351176],[36.057467,120.352482],[36.055903,120.354379],[36.055646,120.354979],[36.057492,120.352453],[36.055939,120.354313],[36.05561,120.355062],[36.057525,120.352419],[36.05592,120.35435],[36.055567,120.355158],[36.055683,120.354842],[36.05357,120.354233],[36.053611,120.351495],[36.05323,120.351508]],"source":"腾讯位置服务 WebService API","verifiedAt":"2026-08-21"},{"fromKey":"badaguan","toKey":"princess_house","fromName":"八大关景区","toName":"公主楼","mode":"walking","distanceM":181,"durationMin":3,"priceFen":null,"taxiFareYuan":null,"transportText":"步行 181m，约 3 分钟","path":[[36.052869,120.351248],[36.052387,120.35002],[36.052318,120.349642],[36.052516,120.34962]],"source":"腾讯位置服务 WebService API","verifiedAt":"2026-08-21"},{"fromKey":"princess_house","toKey":"huashi_house","fromName":"公主楼","toName":"花石楼","mode":"walking","distanceM":564,"durationMin":9,"priceFen":null,"taxiFareYuan":null,"transportText":"步行 564m，约 9 分钟","path":[[36.052516,120.34962],[36.052318,120.349642],[36.052489,120.350433],[36.052398,120.351536],[36.051294,120.35158],[36.051285,120.352033],[36.051084,120.352548],[36.050473,120.353352],[36.050294,120.353169],[36.050148,120.353417]],"source":"腾讯位置服务 WebService API","verifiedAt":"2026-08-21"},{"fromKey":"huashi_house","toKey":"second_beach","fromName":"花石楼","toName":"第二海水浴场","mode":"walking","distanceM":285,"durationMin":4,"priceFen":null,"taxiFareYuan":null,"transportText":"步行 285m，约 4 分钟","path":[[36.050148,120.353417],[36.050294,120.353169],[36.050021,120.352888],[36.050856,120.35163],[36.050825,120.350844]],"source":"腾讯位置服务 WebService API","verifiedAt":"2026-08-21"},{"fromKey":"second_beach","toKey":"signal_hill","fromName":"第二海水浴场","toName":"青岛信号山公园","mode":"transit","distanceM":4519,"durationMin":40,"priceFen":200,"taxiFareYuan":null,"transportText":"公共交通 4.5km，约 40 分钟，腾讯预估 ¥2/人","path":[[36.050825,120.350844],[36.050856,120.35163],[36.054457,120.351513],[36.057033,120.353017],[36.057725,120.352199],[36.057663,120.352085],[36.058144,120.351691],[36.058247,120.351885],[36.060626,120.350051],[36.060924,120.349423],[36.060884,120.348574],[36.059356,120.341951],[36.058775,120.338253],[36.058394,120.333934],[36.058548,120.332658],[36.060358,120.329832],[36.059821,120.329622],[36.060639,120.328406],[36.061274,120.326937],[36.061587,120.326583],[36.062036,120.326472],[36.063192,120.326647],[36.065621,120.327682],[36.065661,120.329179],[36.065922,120.329485],[36.065939,120.329806],[36.066198,120.330283],[36.066409,120.330311],[36.066401,120.331034],[36.066635,120.331202],[36.066597,120.331422],[36.06645,120.331449]],"source":"腾讯位置服务 WebService API","verifiedAt":"2026-08-21"},{"fromKey":"signal_hill","toKey":"beer_museum","fromName":"青岛信号山公园","toName":"青岛啤酒博物馆","mode":"transit","distanceM":3313,"durationMin":35,"priceFen":200,"taxiFareYuan":null,"transportText":"公共交通 3.3km，约 35 分钟，腾讯预估 ¥2/人","path":[[36.06645,120.331449],[36.066597,120.331422],[36.066635,120.331202],[36.066401,120.331034],[36.066409,120.330311],[36.066198,120.330283],[36.065804,120.329216],[36.065939,120.329537],[36.065833,120.33002],[36.064644,120.331301],[36.064004,120.332516],[36.064104,120.333443],[36.064298,120.333849],[36.066082,120.33468],[36.065684,120.335901],[36.066535,120.336401],[36.067387,120.33747],[36.068144,120.337915],[36.068649,120.337709],[36.070386,120.33788],[36.070939,120.338378],[36.071441,120.339246],[36.074042,120.340228],[36.074542,120.340124],[36.074805,120.340237],[36.07628,120.347125],[36.076424,120.348111],[36.077677,120.34711],[36.078785,120.34659],[36.078887,120.347161]],"source":"腾讯位置服务 WebService API","verifiedAt":"2026-08-21"},{"fromKey":"beer_museum","toKey":"taidong","fromName":"青岛啤酒博物馆","toName":"威海路步行街","mode":"walking","distanceM":987,"durationMin":15,"priceFen":null,"taxiFareYuan":null,"transportText":"步行 987m，约 15 分钟","path":[[36.078887,120.347161],[36.079346,120.349321],[36.079719,120.350079],[36.080271,120.350733],[36.083745,120.354055],[36.084487,120.3529]],"source":"腾讯位置服务 WebService API","verifiedAt":"2026-08-21"},{"fromKey":"taidong","toKey":"hotel_mercure","fromName":"威海路步行街","toName":"青岛栈桥海景美居酒店","mode":"transit","distanceM":7495,"durationMin":40,"priceFen":300,"taxiFareYuan":null,"transportText":"公共交通 7.5km，约 40 分钟，腾讯预估 ¥3/人","path":[[36.084487,120.3529],[36.083745,120.354055],[36.082833,120.353204],[36.082397,120.353908],[36.082614,120.354061],[36.082383,120.353833],[36.082221,120.354135],[36.079278,120.350983],[36.076751,120.34783],[36.076429,120.347207],[36.072847,120.328651],[36.07251,120.323888],[36.071913,120.320482],[36.071604,120.317265],[36.070586,120.315533],[36.070296,120.315115],[36.070067,120.315029],[36.06485,120.314935],[36.063167,120.313896],[36.062615,120.312264],[36.061825,120.30814],[36.060597,120.305102],[36.058226,120.301805],[36.05728,120.300209],[36.057472,120.300513],[36.057353,120.300608],[36.056835,120.300397],[36.056826,120.300491],[36.054742,120.300167],[36.054365,120.304298],[36.054505,120.306178],[36.053987,120.306366]],"source":"腾讯位置服务 WebService API","verifiedAt":"2026-08-21"}],"day5":[{"fromKey":"hotel_mercure","toKey":"xiaoqingdao","fromName":"青岛栈桥海景美居酒店","toName":"小青岛公园","mode":"walking","distanceM":4281,"durationMin":65,"priceFen":null,"taxiFareYuan":null,"transportText":"步行 4.3km，约 65 分钟","path":[[36.053987,120.306366],[36.055143,120.305954],[36.056347,120.306395],[36.056798,120.307639],[36.058141,120.30938],[36.058557,120.311013],[36.058989,120.311409],[36.059622,120.312344],[36.060045,120.312574],[36.061003,120.312782],[36.061407,120.313098],[36.061732,120.313669],[36.06207,120.31469],[36.061971,120.314815],[36.062098,120.315469],[36.062251,120.315409],[36.062269,120.315497],[36.062357,120.317739],[36.06227,120.319078],[36.062514,120.320081],[36.061099,120.327666],[36.060928,120.328069],[36.059358,120.330169],[36.058541,120.330161],[36.055489,120.330848],[36.055143,120.331155],[36.054983,120.331726],[36.055046,120.331906],[36.054629,120.332116],[36.054397,120.33177],[36.054101,120.330575],[36.053585,120.330195],[36.053166,120.328983],[36.053284,120.328334],[36.052707,120.324217],[36.053067,120.324037]],"source":"腾讯位置服务 WebService API","verifiedAt":"2026-08-21"},{"fromKey":"xiaoqingdao","toKey":"luxun_park","fromName":"小青岛公园","toName":"鲁迅公园","mode":"walking","distanceM":986,"durationMin":15,"priceFen":null,"taxiFareYuan":null,"transportText":"步行 986m，约 15 分钟","path":[[36.053067,120.324037],[36.052707,120.324217],[36.053284,120.328334],[36.053207,120.329182],[36.053585,120.330195],[36.054005,120.330458],[36.054209,120.330842],[36.054426,120.331845],[36.054132,120.332554],[36.054575,120.3331],[36.054991,120.333094]],"source":"腾讯位置服务 WebService API","verifiedAt":"2026-08-21"},{"fromKey":"luxun_park","toKey":"xiaoyushan","fromName":"鲁迅公园","toName":"小鱼山公园","mode":"walking","distanceM":1037,"durationMin":16,"priceFen":null,"taxiFareYuan":null,"transportText":"步行 1.0km，约 16 分钟","path":[[36.054997,120.33321],[36.055489,120.333664],[36.055533,120.33398],[36.055741,120.334175],[36.055615,120.334361],[36.055658,120.334811],[36.055909,120.334739],[36.05604,120.334858],[36.056439,120.335656],[36.056771,120.335381],[36.057179,120.336011],[36.057594,120.335656],[36.057879,120.336091],[36.058142,120.33587],[36.058265,120.336037],[36.058672,120.335551],[36.059578,120.335166],[36.059708,120.336593],[36.059576,120.336549],[36.05908,120.336862],[36.058795,120.336521]],"source":"腾讯位置服务 WebService API","verifiedAt":"2026-08-21"},{"fromKey":"xiaoyushan","toKey":"hotel_mercure","fromName":"小鱼山公园","toName":"青岛栈桥海景美居酒店","mode":"driving","distanceM":4015,"durationMin":22,"priceFen":null,"taxiFareYuan":12,"transportText":"驾车/打车 4.0km，约 22 分钟，腾讯预估打车约 ¥12","path":[[36.058354,120.336958],[36.058048,120.336608],[36.058207,120.33615],[36.058672,120.335551],[36.059753,120.335073],[36.059902,120.334804],[36.059809,120.333982],[36.060345,120.333518],[36.060544,120.33315],[36.060937,120.332296],[36.060954,120.33163],[36.062512,120.330577],[36.061961,120.327811],[36.062413,120.326429],[36.063804,120.318961],[36.063774,120.315166],[36.063412,120.314781],[36.062367,120.31126],[36.061606,120.311268],[36.06082,120.30867],[36.057154,120.310427],[36.054505,120.306178],[36.053933,120.306386],[36.053819,120.306263]],"source":"腾讯位置服务 WebService API","verifiedAt":"2026-08-21"},{"fromKey":"hotel_mercure","toKey":"airport","fromName":"青岛栈桥海景美居酒店","toName":"青岛胶东国际机场","mode":"transit","distanceM":58364,"durationMin":85,"priceFen":700,"taxiFareYuan":null,"transportText":"公共交通 58.4km，约 85 分钟，腾讯预估 ¥7/人","path":[[36.053987,120.306366],[36.054505,120.306178],[36.054365,120.304298],[36.054742,120.300167],[36.056826,120.300491],[36.056835,120.300397],[36.057353,120.300608],[36.057472,120.300513],[36.05728,120.300209],[36.058226,120.301805],[36.060597,120.305102],[36.061825,120.30814],[36.062615,120.312264],[36.063167,120.313896],[36.06485,120.314935],[36.070067,120.315029],[36.070296,120.315115],[36.070586,120.315533],[36.071604,120.317265],[36.071913,120.320482],[36.07251,120.323888],[36.072847,120.328651],[36.07627,120.346563],[36.076555,120.347524],[36.079278,120.350983],[36.083252,120.355154],[36.085119,120.356726],[36.088688,120.358991],[36.09286,120.361064],[36.093472,120.361278],[36.096749,120.361817],[36.102387,120.361111],[36.108587,120.360831],[36.110654,120.360156],[36.11304,120.359718],[36.114011,120.359739],[36.114845,120.360005],[36.122623,120.36552],[36.126919,120.370082],[36.130869,120.372982],[36.132143,120.373368],[36.137183,120.373285],[36.137962,120.373423],[36.14321,120.375729],[36.143551,120.376083],[36.145292,120.379594],[36.147065,120.38165],[36.147555,120.382077],[36.150428,120.383196],[36.152358,120.383297],[36.153307,120.383033],[36.154196,120.382514],[36.154503,120.3819],[36.154585,120.379881],[36.154901,120.378658],[36.156131,120.376521],[36.156344,120.37625],[36.156732,120.376049],[36.16015,120.375941],[36.162409,120.376456],[36.167232,120.377271],[36.16857,120.377401],[36.169707,120.377356],[36.16968,120.374484],[36.170146,120.372081],[36.175338,120.355531],[36.192347,120.300048],[36.192777,120.297321],[36.193016,120.294756],[36.192994,120.283703],[36.193452,120.282154],[36.198522,120.274694],[36.199216,120.273874],[36.200037,120.273301],[36.209785,120.268471],[36.211249,120.267335],[36.21159,120.266858],[36.211857,120.266064],[36.211651,120.264416],[36.210253,120.256976],[36.208579,120.249278],[36.208331,120.247543],[36.208229,120.245697],[36.208322,120.242765],[36.208511,120.241872],[36.208787,120.241547],[36.209226,120.241328],[36.225406,120.237052],[36.233637,120.234394],[36.235206,120.233676],[36.236531,120.232521],[36.237053,120.231743],[36.237544,120.229964],[36.237817,120.227759],[36.23776,120.225294],[36.237451,120.224046],[36.232828,120.213129],[36.231879,120.210003],[36.231144,120.206269],[36.230928,120.204164],[36.230665,120.197698],[36.230934,120.196688],[36.231572,120.196057],[36.232287,120.195768],[36.237547,120.194825],[36.239027,120.194437],[36.240798,120.193677],[36.244279,120.191796],[36.25012,120.190794],[36.253008,120.189963],[36.257193,120.188408],[36.257838,120.187985],[36.258832,120.187009],[36.259907,120.185618],[36.261426,120.182788],[36.26218,120.180999],[36.262843,120.17821],[36.262882,120.177251],[36.262732,120.176173],[36.259821,120.167009],[36.257674,120.15552],[36.255947,120.150254],[36.255768,120.149045],[36.255685,120.147846],[36.255953,120.144415],[36.25628,120.142804],[36.256589,120.142251],[36.25718,120.141499],[36.257934,120.140812],[36.262248,120.138338],[36.281537,120.129416],[36.299177,120.122009],[36.3093,120.118432],[36.311615,120.118148],[36.316462,120.116679],[36.324449,120.112413],[36.353568,120.097892],[36.357934,120.095798],[36.359945,120.094998],[36.359648,120.095102],[36.359627,120.095015]],"source":"腾讯位置服务 WebService API","verifiedAt":"2026-08-21"}]}};
+const VERIFIED_POIS = VERIFIED_MAP_DATA.pois;
+function verifiedPoi(key, extra) { return Object.assign({}, VERIFIED_POIS[key], extra || {}); }
+function verifiedHotel(key, storageKey, label, note) {
+  const poi = VERIFIED_POIS[key];
+  return {
+    key: storageKey, label, defaultName: poi.name, lat: poi.lat, lng: poi.lng,
+    poiId: poi.poiId, address: poi.address, coordSystem: poi.coordSystem,
+    source: poi.source, verifiedAt: poi.verifiedAt, cityName:'青岛',
+    region: key === 'hotel_hilton' ? '黄岛区' : '市南区', note
+  };
+}
+
+const dayData = [
+  {
+    name:'DAY 1 · 金沙滩·唐岛湾顺线游', date:'8/29 周六', center:[35.94,120.21],
+    hotelStart: verifiedHotel('hotel_hilton','d1_start','起点酒店（D0已入住）','D0晚抵达后入住，腾讯 POI 地址：薛家岛街道嘉陵江东路1号'),
+    hotelEnd: verifiedHotel('hotel_hilton','d1_end','终点酒店','连续住3晚，行李不用搬'),
+    pois:[
+      { cat:'transport', meta:true, name:'D0晚 · 长沙 → 青岛（航班）', time:'20:40', price:'以出票为准', desc:'抵达胶东机场后前往黄岛酒店。航班号与价格请在出发前按实际出票信息复核。' },
+      verifiedPoi('golden_beach',{ cat:'sight', time:'10:00-12:30', price:'免费', desc:'腾讯 POI 详情正式名称为“金沙滩景区”，坐标落在金沙滩景区范围内。', tip:'酒店步行约17分钟；海边注意防晒' }),
+      { cat:'food', meta:true, name:'金沙滩午餐（现场选择明码标价门店）', time:'12:30', price:'约¥150/人', desc:'这是用餐安排，不作为地图地点；到店前在腾讯地图核对具体门店与评价。' },
+      verifiedPoi('beer_city',{ cat:'night', time:'14:00', price:'以现场为准', desc:'腾讯正式 POI：青岛西海岸金沙滩啤酒城，和金沙滩景区相距约193米。' }),
+      verifiedPoi('ferris_wheel',{ cat:'sight', time:'16:00', price:'以现场为准', desc:'腾讯正式 POI 名称为“琴岛之星摩天轮”，不是原页面的模糊名称。' }),
+      verifiedPoi('wetland',{ cat:'sight', time:'17:30-19:00', price:'免费', desc:'腾讯正式 POI：青岛唐岛湾国家湿地公园。', tip:'结束后公共交通回酒店约50分钟，赶时间可打车' })
+    ],
+    routePlan: VERIFIED_MAP_DATA.routePlans.day1,
+    tips:[
+      '<b>顺序</b>：酒店→金沙滩→啤酒城→摩天轮→湿地公园→酒店，避免原页面多次折返',
+      '<b>长距离</b>：啤酒城至摩天轮公共交通约65分钟；摩天轮至湿地公园打车约17分钟、约¥21',
+      '<b>坐标</b>：所有地图点均保存腾讯 POI ID、地址与 GCJ-02 坐标，泛化餐饮不标点'
+    ]
+  },
+  {
+    name:'DAY 2 · 珠山·西海岸环线', date:'8/30 周日', center:[35.93,120.13],
+    hotelStart: verifiedHotel('hotel_hilton','d2_start','起点酒店','10点出发'),
+    hotelEnd: verifiedHotel('hotel_hilton','d2_end','终点酒店','最后1晚黄岛'),
+    pois:[
+      verifiedPoi('zhushan_visitor',{ cat:'sight', time:'10:00-13:00', price:'以景区公告为准', desc:'导航落点使用游客中心，不再把车辆导航到山体内部。', tip:'穿防滑鞋，留意景区开放公告' }),
+      { cat:'food', meta:true, name:'珠山午餐（游客中心周边现场选择）', time:'13:00', price:'约¥80/人', desc:'泛化“农家菜”不作为地图点；选择具体门店后再导航。' },
+      verifiedPoi('red_forest',{ cat:'culture', time:'14:30-16:00', price:'免费逛街区', desc:'腾讯正式 POI：青岛红树林度假世界。' }),
+      verifiedPoi('fish_mouth',{ cat:'sight', time:'16:40-18:00', price:'免费', desc:'腾讯正式 POI：鱼鸣嘴村；礁石湿滑时不要下到未开放区域。' }),
+      verifiedPoi('wetland_south',{ cat:'night', time:'18:30', price:'免费', desc:'以南岸工会驿站作为可核验的日落落点，不再使用虚拟“南岸日落”坐标。' })
+    ],
+    routePlan: VERIFIED_MAP_DATA.routePlans.day2,
+    tips:[
+      '<b>环线</b>：酒店→珠山游客中心→红树林→鱼鸣嘴→唐岛湾南岸→酒店，长距离路线不交叉折返',
+      '<b>交通</b>：本日各段公共交通换乘耗时长，采用打车；每段已写明腾讯路线距离、时间和预估车费',
+      '<b>天气</b>：雨天减少礁石和山路活动，以官方开放状态为准'
+    ]
+  },
+  {
+    name:'DAY 3 · 地铁过海·老城步行', date:'8/31 周一', center:[36.06,120.32],
+    hotelStart: verifiedHotel('hotel_hilton','d3_start','起点酒店','退房后前往天目山路地铁站'),
+    hotelEnd: verifiedHotel('hotel_mercure','d3_end','老城酒店','腾讯 POI 地址：瞿塘峡路30号'),
+    pois:[
+      verifiedPoi('tianmushan_metro',{ cat:'transport', time:'10:30', price:'地铁计价', desc:'腾讯正式地铁站 POI：天目山路[地铁站]。' }),
+      verifiedPoi('qingdao_metro',{ cat:'transport', time:'11:20', price:'全程腾讯预估¥4/人', desc:'乘地铁1号线到青岛站[地铁站]，路线约16.8km、30分钟。' }),
+      { cat:'transport', meta:true, name:'先到青岛栈桥海景美居酒店寄存行李', time:'12:00', price:'—', desc:'青岛站步行到酒店约1.6km、25分钟；行李较多可短途打车。' },
+      verifiedPoi('tuandao_market',{ cat:'food', time:'12:40', price:'按购买与加工计价', desc:'腾讯正式 POI：团岛农贸市场；海鲜加工门店现场确认。' }),
+      verifiedPoi('huilange',{ cat:'sight', time:'14:30', price:'免费', desc:'腾讯正式 POI：栈桥景区-回澜阁。' }),
+      verifiedPoi('st_michael',{ cat:'culture', time:'15:30', price:'以现场公告为准', desc:'腾讯正式 POI：圣弥厄尔大教堂。' }),
+      verifiedPoi('pichaiyuan',{ cat:'food', time:'16:20', price:'约¥50/人', desc:'腾讯正式 POI：劈柴院。' }),
+      verifiedPoi('university_yushan',{ cat:'culture', time:'17:20', price:'免费', desc:'精确落点为“大学路与鱼山路交叉口”，不再使用偏移的泛化网红墙坐标。' })
+    ],
+    routePlan: VERIFIED_MAP_DATA.routePlans.day3,
+    tips:[
+      '<b>行李</b>：青岛站到酒店先寄存，再从西向东游览；最后打车约3.3km回酒店',
+      '<b>步行</b>：回澜阁至教堂约1.2km，教堂至劈柴院约506m，劈柴院至大学路路口约1.9km',
+      '<b>地址</b>：老城酒店已纠正为瞿塘峡路30号，坐标不在海上'
+    ]
+  },
+  {
+    name:'DAY 4 · 八大关·信号山·台东', date:'9/1 周二', center:[36.065,120.345],
+    hotelStart: verifiedHotel('hotel_mercure','d4_start','起点酒店','从瞿塘峡路30号出发'),
+    hotelEnd: verifiedHotel('hotel_mercure','d4_end','终点酒店','最后一晚青岛'),
+    pois:[
+      verifiedPoi('badaguan',{ cat:'sight', time:'09:00', price:'免费', desc:'腾讯正式 POI：八大关景区。' }),
+      verifiedPoi('princess_house',{ cat:'culture', time:'10:10', price:'以现场公告为准', desc:'腾讯正式 POI：公主楼。' }),
+      verifiedPoi('huashi_house',{ cat:'culture', time:'11:00', price:'以现场公告为准', desc:'腾讯正式 POI：花石楼。' }),
+      verifiedPoi('second_beach',{ cat:'sight', time:'12:00', price:'免费', desc:'腾讯正式 POI：第二海水浴场。' }),
+      { cat:'food', meta:true, name:'午餐（沿线具体门店现场确认）', time:'13:00', price:'约¥80/人', desc:'不再把“大学路咖啡午餐”作为虚拟地图点。' },
+      verifiedPoi('signal_hill',{ cat:'sight', time:'15:00', price:'以现场公告为准', desc:'腾讯正式 POI：青岛信号山公园。' }),
+      verifiedPoi('beer_museum',{ cat:'culture', time:'16:40', price:'以官方售票为准', desc:'腾讯正式 POI：青岛啤酒博物馆。' }),
+      verifiedPoi('taidong',{ cat:'night', time:'19:00', price:'约¥100/人', desc:'所选腾讯 POI ID 的详情正式名称为“威海路步行街”，位于台东商圈。' })
+    ],
+    routePlan: VERIFIED_MAP_DATA.routePlans.day4,
+    tips:[
+      '<b>顺序</b>：八大关→公主楼→花石楼→第二海水浴场→信号山→啤酒博物馆→台东商圈',
+      '<b>交通</b>：酒店到八大关、二浴到信号山、信号山到博物馆、台东回酒店均使用腾讯公交路线',
+      '<b>时间</b>：啤酒博物馆营业时间和最后入馆时间请出发前查官方公告'
+    ]
+  },
+  {
+    name:'DAY 5 · 海岸收尾·返程', date:'9/2 周三', center:[36.06,120.32],
+    hotelStart: verifiedHotel('hotel_mercure','d5_start','起点酒店','退房后寄存行李'),
+    hotelEnd: null,
+    pois:[
+      verifiedPoi('xiaoqingdao',{ cat:'sight', time:'08:30', price:'以现场公告为准', desc:'腾讯正式 POI：小青岛公园。酒店步行路线较长，约4.3km、65分钟，建议时间紧时打车。' }),
+      verifiedPoi('luxun_park',{ cat:'sight', time:'09:40', price:'免费', desc:'腾讯正式 POI：鲁迅公园。' }),
+      verifiedPoi('xiaoyushan',{ cat:'sight', time:'10:40', price:'以现场公告为准', desc:'腾讯正式 POI：小鱼山公园。' }),
+      { cat:'food', meta:true, name:'回酒店取行李并午餐', time:'12:00', price:'约¥100/人', desc:'小鱼山到酒店腾讯驾车路线约4km、22分钟，预估打车约¥12。' },
+      verifiedPoi('airport',{ cat:'transport', time:'13:20', price:'腾讯公交预估¥7/人', desc:'腾讯正式 POI：青岛胶东国际机场。酒店出发公共交通约58.4km、85分钟；为航班预留充足缓冲。' }),
+      { cat:'transport', meta:true, name:'青岛胶东 → 长沙黄花', time:'按实际航班', price:'以出票为准', desc:'航班号、航站楼和起飞时间以出票信息与航空公司通知为准。' }
+    ],
+    routePlan: VERIFIED_MAP_DATA.routePlans.day5,
+    tips:[
+      '<b>不回头</b>：酒店→小青岛→鲁迅公园→小鱼山→酒店取行李→机场',
+      '<b>机场</b>：公共交通约85分钟；请结合实际航班至少提前2小时到达航站楼',
+      '<b>弹性</b>：天气差时减少户外点，优先保证返程时间'
+    ]
+  }
+];
+/* ========== 酒店数据持久化 ========== */
+function getHotel(key, def) {
+  try {
+    const v = localStorage.getItem(LS_HOTEL + key);
+    if (v) {
+      const o = JSON.parse(v);
+      return { name:o.name, lat:parseFloat(o.lat), lng:parseFloat(o.lng), address:o.address || '' };
+    }
+  } catch(e){}
+  // 沿用前一日同位置酒店（自动延续）
+  const inheritMap = { 'd2_start':'d1_end', 'd2_end':'d1_start', 'd3_start':'d2_end', 'd4_start':'d3_end', 'd5_start':'d4_end' };
+  if (inheritMap[key]) {
+    const prevKey = inheritMap[key];
+    try {
+      const v = localStorage.getItem(LS_HOTEL + prevKey);
+      if (v) {
+        const o = JSON.parse(v);
+        return { name:o.name, lat:parseFloat(o.lat), lng:parseFloat(o.lng), address:o.address || '' };
+      }
+    } catch(e){}
+  }
+  return { name:def, lat:0, lng:0, address:'' };
+}
+function setHotel(key, data) {
+  try { localStorage.setItem(LS_HOTEL + key, JSON.stringify(data)); } catch(e){}
+}
+function getHotelForCard(h) {
+  // h: dayData里的hotelStart/hotelEnd定义
+  // 返回 {name, lat, lng, address, isDefault}
+  const stored = getHotel(h.key, null);
+  if (stored && stored.name && stored.lat) {
+    return { name:stored.name, lat:stored.lat, lng:stored.lng, address:stored.address, isDefault:false };
+  }
+  return { name:h.defaultName, lat:h.lat, lng:h.lng, address:'', isDefault:true };
+}
+
+/* ========== 地图全局 ========== */
+let map = null, markerLayer = null, pl1 = null, pl2 = null, infoWindow = null;
+let currentMapDay = 0;
+let _curHotelDay = 0;
+let _searchTimer = null;
+
+function makeMarkerSvg(num, color) {
+  return 'data:image/svg+xml,' + encodeURIComponent(
+    '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32">'
+    + '<circle cx="16" cy="16" r="14" fill="' + color + '" stroke="#fff" stroke-width="2"/>'
+    + '<text x="16" y="21" text-anchor="middle" fill="white" font-size="14" font-weight="bold">' + num + '</text></svg>');
+}
+function catColor(cat) {
+  return { sight:'#6366f1', food:'#f59e0b', culture:'#10b981', shop:'#ec4899', night:'#8b5cf6', transport:'#475569', hotel:'#0f766e' }[cat] || '#6366f1';
+}
+function esc(s){ return (s==null?'':String(s)).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+/* ========== 统一 allPois（修复错位bug） ========== */
+function buildAllPois(dayIdx) {
+  const d = dayData[dayIdx];
+  const arr = [];
+  if (d.hotelStart) {
+    const h = getHotelForCard(d.hotelStart);
+    arr.push({ kind:'hotel', pos:'start', hk:d.hotelStart.key, name:h.name, lat:h.lat, lng:h.lng, time:'起点', desc:d.hotelStart.note, address:h.address, isDefault:h.isDefault });
+  }
+  // POI：长途交通段（meta:true）不画地图标记，保留卡片 banner 显示，避免 fitBounds 跨度太大
+  d.pois.forEach(p => {
+    const poi = { kind:'poi', ...p };
+    if (p.meta) poi.meta = true;
+    arr.push(poi);
+  });
+  if (d.hotelEnd) {
+    const h = getHotelForCard(d.hotelEnd);
+    arr.push({ kind:'hotel', pos:'end', hk:d.hotelEnd.key, name:h.name, lat:h.lat, lng:h.lng, time:'终点', desc:d.hotelEnd.note, address:h.address, isDefault:h.isDefault });
+  }
+  return arr;
+}
+
+// 地图标记专用：过滤掉 meta 长途交通段
+function buildMapPois(dayIdx) {
+  return buildAllPois(dayIdx).filter(p => !p.meta);
+}
+
+/* ========== 腾讯地图 ========== */
+function initMap() {
+  try {
+    map = new TMap.Map('map-container', { center: new TMap.LatLng(30.65, 104.06), zoom: 6 });
+    infoWindow = new TMap.InfoWindow({ map, position: new TMap.LatLng(30.65,104.06), offset: { x: 0, y: -36 } });
+    infoWindow.close();
+    updateMap(0);
+  } catch(e) { renderFallbackMap(currentMapDay); }
+}
+
+function updateMap(dayIdx) {
+  if (!map || typeof TMap === 'undefined') { renderFallbackMap(dayIdx); return; }
+  try {
+    const allPois = buildMapPois(dayIdx);  // 地图标记过滤长途交通段
+    if (markerLayer) { markerLayer.setMap(null); markerLayer = null; }
+    if (pl1) { pl1.setMap(null); pl1 = null; }
+    if (pl2) { pl2.setMap(null); pl2 = null; }
+
+    const geometries = allPois.map((p, i) => ({ id:'m'+i, styleId:'s'+i, position:new TMap.LatLng(p.lat, p.lng) }));
+    const styles = {};
+    allPois.forEach((p, i) => { styles['s'+i] = new TMap.MarkerStyle({ width:32, height:32, anchor:{x:16,y:16}, src:makeMarkerSvg(i+1, catColor(p.kind==='hotel'?'hotel':p.cat)) }); });
+    markerLayer = new TMap.MultiMarker({ map, styles, geometries });
+    markerLayer.on('click', (e) => { showInfoWindow(dayIdx, parseInt(e.geometry.id.replace('m',''),10)); });
+
+    const routeGeometries = (dayData[dayIdx].routePlan || []).map((leg, i) => ({
+      id:'route-'+i,
+      styleId:leg.mode,
+      paths:leg.path.map(point => new TMap.LatLng(point[0], point[1]))
+    }));
+    const outlineStyles = {
+      walking:new TMap.PolylineStyle({ color:'rgba(30,41,59,.45)', width:7, borderWidth:0, lineCap:'round', lineJoin:'round' }),
+      transit:new TMap.PolylineStyle({ color:'rgba(30,41,59,.45)', width:8, borderWidth:0, lineCap:'round', lineJoin:'round' }),
+      driving:new TMap.PolylineStyle({ color:'rgba(30,41,59,.45)', width:8, borderWidth:0, lineCap:'round', lineJoin:'round' })
+    };
+    const routeStyles = {
+      walking:new TMap.PolylineStyle({ color:'#16a34a', width:3, borderWidth:0, lineCap:'round', lineJoin:'round', dashArray:[5,5] }),
+      transit:new TMap.PolylineStyle({ color:'#2563eb', width:4, borderWidth:0, lineCap:'round', lineJoin:'round' }),
+      driving:new TMap.PolylineStyle({ color:'#f97316', width:4, borderWidth:0, lineCap:'round', lineJoin:'round' })
+    };
+    pl2 = new TMap.MultiPolyline({ map, styles:outlineStyles, geometries:routeGeometries });
+    pl1 = new TMap.MultiPolyline({ map, styles:routeStyles, geometries:routeGeometries });
+
+    let minLat=90,maxLat=-90,minLng=180,maxLng=-180;
+    allPois.forEach(p => { minLat=Math.min(minLat,p.lat); maxLat=Math.max(maxLat,p.lat); minLng=Math.min(minLng,p.lng); maxLng=Math.max(maxLng,p.lng); });
+    const latPad = Math.max(0.006, (maxLat-minLat) * 0.12);
+    const lngPad = Math.max(0.006, (maxLng-minLng) * 0.12);
+    map.fitBounds(new TMap.LatLngBounds(new TMap.LatLng(minLat-latPad, minLng-lngPad), new TMap.LatLng(maxLat+latPad, maxLng+lngPad)));
+  } catch(e) { renderFallbackMap(dayIdx); }
+}
+
+function showInfoWindow(dayIdx, idx) {
+  if (!map || typeof TMap === 'undefined') { return; }
+  try {
+    // 与地图标记一致：用 buildMapPois（排除 meta 长途交通）取数，idx 与 marker id 对应
+    const allPois = buildMapPois(dayIdx);
+    const p = allPois[idx];
+    if (!p) return;
+    infoWindow.setPosition(new TMap.LatLng(p.lat, p.lng));
+    infoWindow.setContent('<div style="padding:10px 14px;max-width:240px;font-family:-apple-system,\'PingFang SC\',sans-serif;word-break:break-all;word-wrap:break-word;white-space:normal">'
+      + '<div style="font-weight:700;font-size:14px;color:#1a1f36;word-break:break-all">' + (idx+1) + '. ' + esc(p.name) + '</div>'
+      + '<div style="font-size:11px;color:#697386;margin:4px 0;word-break:break-all">⏰ ' + esc(p.time||'') + '</div>'
+      + (p.address ? '<div style="font-size:11px;color:#475569;margin:2px 0;word-break:break-all">📍 ' + esc(p.address) + '</div>' : '')
+      + '<div style="font-size:12px;color:#3d4557;line-height:1.5;word-break:break-all;white-space:normal">' + (p.desc||'') + '</div>'
+      + (p.tip ? '<div style="font-size:11px;color:#c2410c;margin-top:6px;word-break:break-all">📷 ' + esc(p.tip) + '</div>' : '')
+      + '</div>');
+    infoWindow.open();
+  } catch(e) {}
+}
+
+function focusPoi(dayIdx, idx) {
+  try {
+    if (dayIdx !== currentMapDay) switchMapDay(dayIdx, true);
+    if (map && typeof TMap !== 'undefined') {
+      const allPois = buildMapPois(dayIdx);  // 统一用 buildMapPois，idx 与地图标记一致
+      const p = allPois[idx];
+      if (p) { map.easeTo({ center: new TMap.LatLng(p.lat, p.lng), zoom: 13 }, { duration: 800 }); showInfoWindow(dayIdx, idx); }
+    }
+  } catch(e) { renderFallbackMap(dayIdx); }
+  document.querySelectorAll('#itinerary-content .tl-content').forEach(el => el.classList.remove('hl'));
+  const cards = document.querySelectorAll('#itinerary-content .tl-content');
+  if (cards[idx]) cards[idx].classList.add('hl');
+}
+
+function switchMapDay(dayIdx, silent) {
+  currentMapDay = dayIdx;
+  document.querySelectorAll('.map-tab').forEach((t, i) => t.classList.toggle('active', i === dayIdx));
+  renderItinerary(dayIdx);
+  if (!silent) {
+    const sec = document.getElementById('itinerary-section');
+    if (sec) sec.scrollIntoView({ behavior:'smooth', block:'start' });
+  }
+  if (map && typeof TMap !== 'undefined') { updateMap(dayIdx); }
+  else { renderFallbackMap(dayIdx); }
+}
+
+/* ========== 行程渲染（统一索引） ========== */
+function renderItinerary(dayIdx) {
+  const d = dayData[dayIdx];
+  const allPois = buildAllPois(dayIdx);
+  let html = '<div class="day-block">'
+    + '<div class="day-head"><span class="day-badge">' + d.name.split('·')[0] + '</span>'
+    + '<span class="day-title">' + d.name + '</span><span class="day-sub">' + d.date + '</span></div>';
+
+  // meta 长途交通段：在 day-block 顶部渲染为 banner（不画地图标记，不参与fitBounds）
+  allPois.forEach(p => {
+    if (p.kind !== 'poi' || !p.meta) return;
+    const metaLabel = p.cat === 'food' ? '🍽 用餐安排' : (p.cat === 'transport' ? '🚄 交通/衔接' : '📌 行程说明');
+    html += '<div class="meta-banner" style="background:#fff8e1;border:1px solid #ffe082;border-radius:10px;padding:10px 14px;margin-bottom:10px;font-size:13px;color:#7c5800">'
+      + '<span style="font-weight:700;margin-right:6px">' + metaLabel + '</span>'
+      + '<b>' + esc(p.name) + '</b> · ⏰ ' + esc(p.time||'') + ' · ' + esc(p.price||'')
+      + (p.line ? ' · <span style="font-family:ui-monospace,monospace;background:#7c5800;color:#fff;padding:1px 6px;border-radius:4px;font-size:12px">' + esc(p.line) + '</span>' : '')
+      + '<div style="margin-top:4px;color:#7c5800;opacity:0.85">' + esc(p.desc||'') + '</div></div>';
+  });
+
+  let mapIdx = 0;
+  allPois.forEach(p => {
+    if (p.kind === 'hotel') {
+      html += hotelHtml(p, dayIdx, mapIdx);
+      mapIdx += 1;
+    } else if (p.meta) {
+      // meta 已渲染为 banner，跳过时间轴
+    } else {
+      html += poiHtml(p, dayIdx, mapIdx);
+      mapIdx += 1;
+    }
+  });
+
+  if (d.routePlan && d.routePlan.length) {
+    const modeLabel = { walking:'步行', transit:'公共交通', driving:'驾车/打车' };
+    const modeColor = { walking:'#16a34a', transit:'#2563eb', driving:'#f97316' };
+    html += '<div style="margin:18px 0 14px;padding:14px;border:1px solid #dbeafe;border-radius:12px;background:#f8fbff">'
+      + '<div style="font-weight:800;color:#1e3a8a;margin-bottom:9px">腾讯路线规划（逐段真实轨迹）</div>';
+    d.routePlan.forEach((leg, index) => {
+      html += '<div style="display:grid;grid-template-columns:22px 1fr;gap:8px;margin:7px 0;font-size:12px;line-height:1.55;color:#334155">'
+        + '<span style="width:20px;height:20px;border-radius:50%;background:' + modeColor[leg.mode] + ';color:#fff;text-align:center;line-height:20px;font-weight:700">' + (index+1) + '</span>'
+        + '<span><b>' + esc(leg.fromName) + ' → ' + esc(leg.toName) + '</b><br>'
+        + '<span style="color:' + modeColor[leg.mode] + ';font-weight:700">' + modeLabel[leg.mode] + '</span> · ' + esc(leg.transportText)
+        + '</span></div>';
+    });
+    html += '<div style="margin-top:9px;font-size:11px;color:#64748b">绿色虚线=步行，蓝线=公共交通，橙线=驾车/打车。距离、时长和费用来自腾讯位置服务，实际以出发时路况与计价为准。</div></div>';
+  }
+
+  if (d.tips && d.tips.length) {
+    html += '<div class="day-tips"><div class="dt-title">🎯 当日专属贴士（' + d.date + '）</div><ul>';
+    d.tips.forEach(t => { html += '<li>' + t + '</li>'; });
+    html += '</ul></div>';
+  }
+  html += '</div>';
+  document.getElementById('itinerary-content').innerHTML = html;
+}
+
+function poiHtml(p, dayIdx, idx) {
+  let tags = '<span class="tag tag-' + p.cat + '">' + CAT_CN[p.cat] + '</span>';
+  if (p.tip) tags += '<span class="tag tag-tip">📷 ' + esc(p.tip) + '</span>';
+  if (p.price) tags += '<span class="tag tag-cost">💰 ' + esc(p.price) + '</span>';
+  let extra = '';
+  if (p.cat === 'transport' && p.line) {
+    extra = '<div class="transport-line"><span class="tno">' + esc(p.line) + '</span></div>'
+      + (p.alt ? '<div class="transport-line" style="color:#b45309;font-weight:500"><span style="font-size:11px">备选</span> ' + esc(p.alt) + '</div>' : '');
+  }
+  return '<div class="tl-item">'
+    + '<div class="tl-dot"></div>'
+    + '<div class="tl-time">' + esc(p.time ? p.time.split('-')[0] : '') + '</div>'
+    + '<div class="tl-content ' + (p.cat==='transport' ? 'transport-card' : '') + '" onclick="focusPoi(' + dayIdx + ',' + idx + ')">'
+    + '<div class="tl-place"><span class="tl-seq seq-' + p.cat + '">' + (p.cat==='transport' ? '🚄' : p.cat==='food' ? '食' : p.cat==='culture' ? '文' : p.cat==='night' ? '夜' : (idx+1)) + '</span>' + esc(p.name) + '</div>'
+    + extra
+    + '<div class="tl-desc">' + esc(p.desc) + '</div>'
+    + '<div class="tl-tags">' + tags + '</div>'
+    + '</div></div>';
+}
+
+function hotelHtml(p, dayIdx, idx) {
+  const dropId = 'hd-' + p.hk;
+  return '<div class="tl-item">'
+    + '<div class="tl-dot" style="background:#0f766e;box-shadow:0 0 0 4px rgba(15,118,110,.15)"></div>'
+    + '<div class="tl-time" style="color:#0f766e">' + p.pos + '</div>'
+    + '<div class="tl-content hotel-card">'
+    + '<div class="tl-place"><span class="tl-seq seq-hotel">🏨</span>'
+    + '<input class="hotel-input" id="inp-' + p.hk + '" value="' + esc(p.name) + '" placeholder="点击搜索酒店" readonly onclick="openHotelDropdown(\'' + p.hk + '\', \'' + esc(p.address||'') + '\', \'' + esc(p.desc||'') + '\', ' + dayIdx + ', ' + idx + ')" title="点击搜索更换酒店">'
+    + '</div>'
+    + '<div class="hotel-meta">'
+    + '<span class="pin-icon">📍</span>'
+    + (p.isDefault ? '<span style="color:#b45309">推荐位置</span> · ' : '')
+    + (p.address || p.desc)
+    + (p.lat && p.lng ? ' <span class="coord">(' + p.lat.toFixed(4) + ', ' + p.lng.toFixed(4) + ')</span>' : '')
+    + ' <span class="edit-link" onclick="openHotelDropdown(\'' + p.hk + '\', \'\', \'\', ' + dayIdx + ', ' + idx + ')">🔄 换酒店</span>'
+    + '</div>'
+    + '<div class="tl-tags"><span class="tag tag-hotel">酒店</span><span class="tag tag-cost">宿 ' + p.pos + '</span></div>'
+    + '<div class="hotel-dropdown" id="' + dropId + '" style="display:none"></div>'
+    + '</div></div>';
+}
+
+/* ========== 酒店搜索 ========== */
+function openHotelDropdown(key, currentAddr, currentNote, dayIdx, idx) {
+  _curHotelDay = dayIdx;
+  // 关闭其他
+  document.querySelectorAll('.hotel-dropdown').forEach(d => { if (d.id !== 'hd-'+key) d.style.display='none'; });
+  const drop = document.getElementById('hd-' + key);
+  if (!drop) return;
+  if (drop.style.display === 'block') { drop.style.display = 'none'; return; }
+  // 获取当前酒店对应的cityName/region
+  const hk = findHotelDef(key);
+  if (!hk) return;
+  // 渲染：搜索框 + 推荐
+  drop.innerHTML = '<div class="hd-search">'
+    + '<input type="text" id="hd-input-' + key + '" placeholder="搜索 ' + hk.cityName + ' ' + hk.label + ' 附近的酒店" autocomplete="off">'
+    + '</div>'
+    + '<div class="hd-label">📍 推荐酒店（点击选中）</div>'
+    + '<div id="hd-rec-' + key + '"></div>'
+    + '<div class="hd-label" id="hd-srch-label-' + key + '" style="display:none">🔍 搜索结果</div>'
+    + '<div id="hd-srch-' + key + '"></div>';
+  drop.style.display = 'block';
+
+  // 渲染预置推荐
+  const recs = getRecommend(hk);
+  document.getElementById('hd-rec-' + key).innerHTML = recs.length
+    ? recs.map((c, i) => renderOpt(key, c, i, 'rec')).join('')
+    : '<div class="hd-empty">暂无推荐，请输入关键词搜索</div>';
+
+  // 绑定搜索框
+  const input = document.getElementById('hd-input-' + key);
+  input.focus();
+  input.addEventListener('input', function() {
+    clearTimeout(_searchTimer);
+    const kw = this.value.trim();
+    if (!kw) {
+      document.getElementById('hd-srch-label-' + key).style.display = 'none';
+      document.getElementById('hd-srch-' + key).innerHTML = '';
+      return;
+    }
+    _searchTimer = setTimeout(function() { doHotelSearch(key, kw, hk); }, 300);
+  });
+}
+
+function findHotelDef(key) {
+  for (let d = 0; d < dayData.length; d++) {
+    if (dayData[d].hotelStart && dayData[d].hotelStart.key === key) return dayData[d].hotelStart;
+    if (dayData[d].hotelEnd && dayData[d].hotelEnd.key === key) return dayData[d].hotelEnd;
+  }
+  return null;
+}
+
+function renderOpt(key, c, i, kind) {
+  return '<div class="hd-opt" onclick="selectHotel(\'' + key + '\',\'' + kind + '\',' + i + ')">'
+    + '<div class="opt-name">🏨 ' + esc(c.name) + '</div>'
+    + '<div class="opt-addr">📍 ' + esc(c.address || '') + '</div>'
+    + '<div class="opt-coord">' + c.lat.toFixed(4) + ', ' + c.lng.toFixed(4) + '</div>'
+    + '</div>';
+}
+
+function doHotelSearch(key, keyword, hk) {
+  const target = document.getElementById('hd-srch-' + key);
+  const label = document.getElementById('hd-srch-label-' + key);
+  target.innerHTML = '<div class="hd-empty">🔍 搜索中...</div>';
+  label.style.display = 'block';
+  // 优先用 TMap.service.Search（前端，无需额外key）
+  let usedApi = false;
+  if (typeof TMap !== 'undefined' && TMap.service && TMap.service.Search) {
+    try {
+      const search = new TMap.service.Search({ pageSize: 8 });
+      const refLoc = (hk && hk.lat) ? new TMap.LatLng(hk.lat, hk.lng) : undefined;
+      const params = { keyword: keyword, cityName: hk.cityName || '青岛' };
+      if (refLoc) params.referenceLocation = refLoc;
+      const p = search.searchRegion(params);
+      if (p && p.then) {
+        usedApi = true;
+        p.then(function(res) {
+          const list = (res && res.data) ? res.data : [];
+          const apiCs = list.map(it => ({ name: it.title || it.name, lat: it.location ? it.location.lat : (it.lat || 0), lng: it.location ? it.location.lng : (it.lng || 0), address: it.address || it.city || '' }))
+            .filter(c => c.lat && c.lng);
+          // API 有结果就用 API，否则降级跨所有预置候选做模糊匹配
+          if (apiCs.length) {
+            target.innerHTML = apiCs.map((c, i) => renderOpt(key, c, i, 'srch')).join('');
+            window['_hd_srch_' + key] = apiCs;
+          } else {
+            renderFallbackHotelSearch(key, keyword, target);
+          }
+        }).catch(function() {
+          renderFallbackHotelSearch(key, keyword, target);
+        });
+        return;
+      }
+    } catch(e) { /* 走降级 */ }
+  }
+  if (!usedApi) renderFallbackHotelSearch(key, keyword, target);
+}
+
+// 降级搜索：跨所有 HOTEL_CANDIDATES 候选做模糊匹配（去特殊字符 + 拆词）
+function normalize(s) {
+  return (s || '').toLowerCase().replace(/[\s·`\-_　、，。.!！？?]/g, '');
+}
+function fuzzyMatch(text, keyword) {
+  const t = normalize(text);
+  const k = normalize(keyword);
+  if (!k) return false;
+  if (t.includes(k)) return true;
+  // 拆词匹配（关键词每个字都出现）
+  let i = 0, j = 0;
+  while (i < t.length && j < k.length) {
+    if (t[i] === k[j]) j++;
+    i++;
+  }
+  return j === k.length;
+}
+function renderFallbackHotelSearch(key, keyword, target) {
+  // 跨所有 key 收集候选
+  const all = [];
+  for (const k of Object.keys(HOTEL_CANDIDATES)) {
+    const arr = HOTEL_CANDIDATES[k] || [];
+    for (const c of arr) {
+      if (fuzzyMatch(c.name + c.address, keyword)) all.push(c);
+    }
+  }
+  // 去重（同 name+lat+lng）
+  const seen = new Set();
+  const uniq = all.filter(c => { const k = c.name+'|'+c.lat+'|'+c.lng; if (seen.has(k)) return false; seen.add(k); return true; });
+  if (uniq.length) {
+    target.innerHTML = uniq.map((c, i) => renderOpt(key, c, i, 'srch')).join('');
+    window['_hd_srch_' + key] = uniq;
+  } else {
+    target.innerHTML = '<div class="hd-empty">未找到匹配项。请在<a href="https://map.qq.com/?type=hotel&q=' + encodeURIComponent(keyword) + '" target="_blank">腾讯地图搜索</a>后选点</div>';
+    window['_hd_srch_' + key] = [];
+  }
+}
+
+function selectHotel(key, kind, idx) {
+  let c = null;
+  if (kind === 'rec') c = getRecommend(findHotelDef(key))[idx];
+  else if (kind === 'recfall') c = window['_hd_srch_' + key] ? window['_hd_srch_' + key][idx] : null;
+  else c = window['_hd_srch_' + key] ? window['_hd_srch_' + key][idx] : null;
+  if (!c) return;
+  // 持久化
+  setHotel(key, { name: c.name, lat: c.lat, lng: c.lng, address: c.address || '' });
+  // 关闭下拉
+  document.getElementById('hd-' + key).style.display = 'none';
+  // 重渲染用户正在浏览的day（用 _curHotelDay 而非 currentMapDay）
+  renderItinerary(_curHotelDay);
+  // 更新地图
+  if (map && typeof TMap !== 'undefined') updateMap(_curHotelDay);
+  else renderFallbackMap(_curHotelDay);
+}
+
+/* ========== 预置推荐酒店（按key） ========== */
+const HOTEL_CANDIDATES = {
+  'd1_start': [ // 黄岛金沙滩
+    { name:'青岛金沙滩希尔顿酒店', lat:35.957364, lng:120.236896, address:'黄岛区薛家岛街道嘉陵江东路1号' }
+  ],
+  'd1_end': null,
+  'd2_start': null,
+  'd2_end': null,
+  'd3_start': null,
+  'd3_end': [ // 老城区栈桥/中山路
+    { name:'青岛栈桥海景美居酒店', lat:36.053922, lng:120.306090, address:'市南区瞿塘峡路30号' }
+  ],
+  'd4_start': null,
+  'd4_end': null,
+  'd5_start': null
+};
+function getRecommend(hk) {
+  if (!hk) return [];
+  let list = HOTEL_CANDIDATES[hk.key];
+  if (list) return list;
+  // 沿用
+  const inheritMap = { 'd2_start':'d1_end', 'd2_end':'d1_start', 'd3_start':'d2_end', 'd4_start':'d3_end', 'd5_start':'d4_end' };
+  const prevKey = inheritMap[hk.key];
+  if (prevKey && HOTEL_CANDIDATES[prevKey]) return HOTEL_CANDIDATES[prevKey];
+  return [];
+}
+
+/* ========== 降级 ========== */
+function renderFallbackMap(dayIdx) {
+  // 中国境内腾讯坐标为 GCJ-02；OSM/Leaflet 底图采用 WGS-84，叠加会产生系统性偏移。
+  // 腾讯地图不可用时直接显示无底图的真实路线 SVG，避免给用户错误位置感。
+  renderStaticFallbackMap(dayIdx);
+}
+function loadLeafletAssets(onReady, onError) {
+  if (window.L && document.getElementById('leaflet-css')) { onReady(); return; }
+  const css = document.createElement('link'); css.id='leaflet-css'; css.rel='stylesheet';
+  css.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css'; document.head.appendChild(css);
+  const s = document.createElement('script');
+  s.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+  s.onload = onReady; s.onerror = onError; document.head.appendChild(s);
+}
+function renderLeafletMap(dayIdx) {
+  try {
+    if (!window.L) { renderStaticFallbackMap(dayIdx); return; }
+    const el = document.getElementById('map-container'); el.innerHTML = '';
+    const allPois = buildMapPois(dayIdx);
+    const lmap = L.map('map-container');
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom:18, attribution:'© OSM' }).addTo(lmap);
+    const latlngs = allPois.map(p => [p.lat, p.lng]);
+    allPois.forEach((p, i) => {
+      L.marker([p.lat, p.lng]).addTo(lmap).bindPopup('<b>' + (i+1) + '. ' + p.name + '</b><br>⏰ ' + (p.time||'') + '<br>' + (p.desc||''));
+    });
+    const fallbackColors = { walking:'#16a34a', transit:'#2563eb', driving:'#f97316' };
+    const routePoints = [];
+    (dayData[dayIdx].routePlan || []).forEach(leg => {
+      const points = leg.path.map(point => [point[0], point[1]]);
+      routePoints.push(...points);
+      L.polyline(points, { color:fallbackColors[leg.mode], weight:4, dashArray:leg.mode==='walking'?'6 6':null }).addTo(lmap);
+    });
+    lmap.fitBounds(latlngs.concat(routePoints), { padding:[30,30] });
+  } catch(e) { renderStaticFallbackMap(dayIdx); }
+}
+function renderStaticFallbackMap(dayIdx) {
+  try {
+    const allPois = buildMapPois(dayIdx);
+    const el = document.getElementById('map-container');
+    let minLat=90,maxLat=-90,minLng=180,maxLng=-180;
+    allPois.forEach(p => { minLat=Math.min(minLat,p.lat); maxLat=Math.max(maxLat,p.lat); minLng=Math.min(minLng,p.lng); maxLng=Math.max(maxLng,p.lng); });
+    (dayData[dayIdx].routePlan || []).forEach(leg => leg.path.forEach(point => {
+      minLat=Math.min(minLat,point[0]); maxLat=Math.max(maxLat,point[0]); minLng=Math.min(minLng,point[1]); maxLng=Math.max(maxLng,point[1]);
+    }));
+    const W=640, H=380, pad=30;
+    const xf = x => pad + (x-minLng)/(maxLng-minLng||1)*(W-2*pad);
+    const yf = y => H-pad - (y-minLat)/(maxLat-minLat||1)*(H-2*pad);
+    const fallbackColors = { walking:'#16a34a', transit:'#2563eb', driving:'#f97316' };
+    let html = '<svg viewBox="0 0 '+W+' '+H+'" style="width:100%;height:100%;background:#eef2f7">';
+    (dayData[dayIdx].routePlan || []).forEach(leg => {
+      const pts = leg.path.map(point => xf(point[1]).toFixed(1)+','+yf(point[0]).toFixed(1));
+      html += '<polyline points="'+pts.join(' ')+'" fill="none" stroke="'+fallbackColors[leg.mode]+'" stroke-width="3" stroke-linejoin="round"'+(leg.mode==='walking'?' stroke-dasharray="6 6"':'')+'/>';
+    });
+    allPois.forEach((p,i)=>{
+      const cx=xf(p.lng), cy=yf(p.lat);
+      const color = p.kind==='hotel' ? catColor('hotel') : catColor(p.cat);
+      html += '<circle cx="'+cx+'" cy="'+cy+'" r="13" fill="'+color+'" stroke="#fff" stroke-width="2"/>'
+        + '<text x="'+cx+'" y="'+(cy+4)+'" text-anchor="middle" font-size="11" fill="#fff" font-weight="bold">'+(i+1)+'</text>'
+        + '<text x="'+cx+'" y="'+(cy+28)+'" text-anchor="middle" font-size="10" fill="#1a1f36">'+p.name+'</text>';
+    });
+    html += '</svg>';
+    el.innerHTML = html;
+  } catch(e) { document.getElementById('map-container').innerHTML = '<div style="padding:40px;text-align:center;color:#697386">地图加载失败，请联网后刷新</div>'; }
+}
+
+/* ========== 初始化 ========== */
+document.addEventListener('DOMContentLoaded', function() {
+  setPax(pax);
+  renderHotelRecs();
+  renderItinerary(0);
+  const script = document.createElement('script');
+  script.src = 'https://map.qq.com/api/gljs?v=1.exp&libraries=service&key=' + HOTEL_SEARCH_KEY + '&callback=initMap';
+  script.onerror = function() { renderFallbackMap(currentMapDay); };
+  document.body.appendChild(script);
+  setTimeout(function() { if (!map) renderFallbackMap(0); }, 3000);
+});
+</script>
+</body>
 </html>
