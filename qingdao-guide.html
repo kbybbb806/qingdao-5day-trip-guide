@@ -502,12 +502,22 @@ function buildAllPois(dayIdx) {
     const h = getHotelForCard(d.hotelStart);
     arr.push({ kind:'hotel', pos:'start', hk:d.hotelStart.key, name:h.name, lat:h.lat, lng:h.lng, time:'起点', desc:d.hotelStart.note, address:h.address, isDefault:h.isDefault });
   }
-  d.pois.forEach(p => arr.push({ kind:'poi', ...p }));
+  // POI：长途交通段（meta:true）不画地图标记，保留卡片 banner 显示，避免 fitBounds 跨度太大
+  d.pois.forEach(p => {
+    const poi = { kind:'poi', ...p };
+    if (p.meta) poi.meta = true;
+    arr.push(poi);
+  });
   if (d.hotelEnd) {
     const h = getHotelForCard(d.hotelEnd);
     arr.push({ kind:'hotel', pos:'end', hk:d.hotelEnd.key, name:h.name, lat:h.lat, lng:h.lng, time:'终点', desc:d.hotelEnd.note, address:h.address, isDefault:h.isDefault });
   }
   return arr;
+}
+
+// 地图标记专用：过滤掉 meta 长途交通段
+function buildMapPois(dayIdx) {
+  return buildAllPois(dayIdx).filter(p => !p.meta);
 }
 
 /* ========== 腾讯地图 ========== */
@@ -523,7 +533,7 @@ function initMap() {
 function updateMap(dayIdx) {
   if (!map || typeof TMap === 'undefined') { renderFallbackMap(dayIdx); return; }
   try {
-    const allPois = buildAllPois(dayIdx);
+    const allPois = buildMapPois(dayIdx);  // 地图标记过滤长途交通段
     if (markerLayer) { markerLayer.setMap(null); markerLayer = null; }
     if (pl1) { pl1.setMap(null); pl1 = null; }
     if (pl2) { pl2.setMap(null); pl2 = null; }
@@ -597,9 +607,21 @@ function renderItinerary(dayIdx) {
     + '<div class="day-head"><span class="day-badge">' + d.name.split('·')[0] + '</span>'
     + '<span class="day-title">' + d.name + '</span><span class="day-sub">' + d.date + '</span></div>';
 
+  // meta 长途交通段：在 day-block 顶部渲染为 banner（不画地图标记，不参与fitBounds）
+  allPois.forEach(p => {
+    if (p.kind !== 'poi' || !p.meta) return;
+    html += '<div class="meta-banner" style="background:#fff8e1;border:1px solid #ffe082;border-radius:10px;padding:10px 14px;margin-bottom:10px;font-size:13px;color:#7c5800">'
+      + '<span style="font-weight:700;margin-right:6px">✈ 长途交通</span>'
+      + '<b>' + esc(p.name) + '</b> · ⏰ ' + esc(p.time||'') + ' · ' + esc(p.price||'')
+      + (p.line ? ' · <span style="font-family:ui-monospace,monospace;background:#7c5800;color:#fff;padding:1px 6px;border-radius:4px;font-size:12px">' + esc(p.line) + '</span>' : '')
+      + '<div style="margin-top:4px;color:#7c5800;opacity:0.85">' + esc(p.desc||'') + '</div></div>';
+  });
+
   allPois.forEach((p, i) => {
     if (p.kind === 'hotel') {
       html += hotelHtml(p, dayIdx, i);
+    } else if (p.meta) {
+      // meta 已渲染为 banner，跳过时间轴
     } else {
       html += poiHtml(p, dayIdx, i);
     }
@@ -859,7 +881,7 @@ function renderLeafletMap(dayIdx) {
   try {
     if (!window.L) { renderStaticFallbackMap(dayIdx); return; }
     const el = document.getElementById('map-container'); el.innerHTML = '';
-    const allPois = buildAllPois(dayIdx);
+    const allPois = buildMapPois(dayIdx);
     const lmap = L.map('map-container');
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom:18, attribution:'© OSM' }).addTo(lmap);
     const latlngs = allPois.map(p => [p.lat, p.lng]);
@@ -872,7 +894,7 @@ function renderLeafletMap(dayIdx) {
 }
 function renderStaticFallbackMap(dayIdx) {
   try {
-    const allPois = buildAllPois(dayIdx);
+    const allPois = buildMapPois(dayIdx);
     const el = document.getElementById('map-container');
     let minLat=90,maxLat=-90,minLng=180,maxLng=-180;
     allPois.forEach(p => { minLat=Math.min(minLat,p.lat); maxLat=Math.max(maxLat,p.lat); minLng=Math.min(minLng,p.lng); maxLng=Math.max(maxLng,p.lng); });
