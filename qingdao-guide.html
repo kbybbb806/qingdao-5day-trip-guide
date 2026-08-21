@@ -558,7 +558,8 @@ function updateMap(dayIdx) {
 function showInfoWindow(dayIdx, idx) {
   if (!map || typeof TMap === 'undefined') { return; }
   try {
-    const allPois = buildAllPois(dayIdx);
+    // 与地图标记一致：用 buildMapPois（排除 meta 长途交通）取数，idx 与 marker id 对应
+    const allPois = buildMapPois(dayIdx);
     const p = allPois[idx];
     if (!p) return;
     infoWindow.setPosition(new TMap.LatLng(p.lat, p.lng));
@@ -577,7 +578,7 @@ function focusPoi(dayIdx, idx) {
   try {
     if (dayIdx !== currentMapDay) switchMapDay(dayIdx, true);
     if (map && typeof TMap !== 'undefined') {
-      const allPois = buildAllPois(dayIdx);
+      const allPois = buildMapPois(dayIdx);  // 统一用 buildMapPois，idx 与地图标记一致
       const p = allPois[idx];
       if (p) { map.easeTo({ center: new TMap.LatLng(p.lat, p.lng), zoom: 13 }, { duration: 800 }); showInfoWindow(dayIdx, idx); }
     }
